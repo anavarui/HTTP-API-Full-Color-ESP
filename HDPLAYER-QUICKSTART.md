@@ -59,3 +59,5 @@ Hacemos clic en Transmitir. La información se quedará guardada en la memoria i
 ![](images/Pasted%20image%2020260519125020.png)
 
 ---
+
+[<< Volver al README](README.md)
