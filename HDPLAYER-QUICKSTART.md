@@ -1,7 +1,7 @@
-# 3. Guía rápida de HDPlayer
+# Guía rápida de HDPlayer
 Para que puedas aprender rápidamente las funciones principales que vas a necesitar, como detectar el dispositivo en línea.
 
-## 3.1 Instalar HDPlayer
+## 1. Instalar HDPlayer
 
 ![](images/HDPlayer_128x128_32bit.png)
 
@@ -12,7 +12,7 @@ Puedes descargar la **última versión de HDPlayer** y el **manual completo** [a
 ![](images/Pasted%20image%2020260519124432.png)
 *Software HDPlayer*
 
-## 3.2 Detectar pantalla y encontrar IP e ID de dispositivo con HDPlayer
+## 2. Detectar pantalla y encontrar IP e ID de dispositivo con HDPlayer
 
 Vaya a la lista de dispositivos LED haciendo clic en la esquina inferior:
 
@@ -22,7 +22,7 @@ En esta ventana podrá ver las direcciones IP de todas las pantallas en red loca
 
 NOTA: El SDK solo funcionará con las pantallas habilitadas para SDK. Estas pantallas contienen una D en el nombre: C16L-Dxx-xxxxx.
 
-## 3.3 Asignar una IP fija
+## 3. Asignar una IP fija
 
 En HDPlayer vaya a Control > Información de dispositivo y en la nueva ventana selecciona la pestaña “Configuración de red”.
 
@@ -30,7 +30,7 @@ En HDPlayer vaya a Control > Información de dispositivo y en la nueva ventana s
 
 Desmarcar “Adquisición automática” y rellenar los campos con los valores de red deseados. Pulsa en "determinar" para enviar la configuración.
 
-## 3.4 Creación de programas en HDPlayer
+## 4. Creación de programas en HDPlayer
 >Esta sección es meramente informativa. La API permite realizar las funciones básicas de HDPlayer.
 
 En HDplayer entendemos la creación de un diseño de pantalla como una lista de programas. Cada programa contiene áreas con distintas funciones, área de texto, área de imagen, área de vídeo, y otras áreas con funciones especiales como fecha y hora. Cada área tiene una posición y tamaño configurable.

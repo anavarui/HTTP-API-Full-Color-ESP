@@ -1,7 +1,7 @@
-# 2. Guía rápida de Postman
+# Guía rápida de Postman
 Solo te llevará unos minutos y ya podrás empezar a testear la API. Vamos paso a paso.
 
-## 2.1 Instalar Postman
+## 1. Instalar Postman
 
 Descarge Postman de su página web oficial [postman.com](https://www.postman.com/downloads/) e instale el software.
 
@@ -9,7 +9,7 @@ Inicie sesión para poder importar la colección.
 
 ![](images/Pasted%20image%2020260519205100.png)
 
-## 2.2 Importar la collección
+## 2. Importar la collección
 
 Pulsa en `Import`.
 
@@ -19,7 +19,7 @@ Arrastra el archivo .json dentro.
 
 ![](images/Pasted%20image%2020260519210050.png)
 
-## 2.3 Configurar variables de entorno
+## 3. Configurar variables de entorno
 
 Una vez importada la colección, ahora vamos a `Create Enviroment` y pon un nombre al nuevo ambiente.
 

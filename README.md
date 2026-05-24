@@ -28,6 +28,7 @@ Documentación HTTP API para FULL COLOR SDK
     - 8.4. [Apéndice 4: Lista de códigos de error SDK](#84-apéndice-4-lista-de-códigos-de-error-sdk)
 
 Anexo 1. [Guía rápida de Postman](POSTMAN-QUICKSTART.md)
+
 Anexo 2. [Guía rápida de HDPlayer](HDPLAYER-QUICKSTART.md)
 
 
