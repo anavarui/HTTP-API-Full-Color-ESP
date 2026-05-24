@@ -5,9 +5,10 @@ Documentación HTTP API para FULL COLOR SDK
 1. [Introducción](#1-introducción)
 2. [Cómo empezar a testear la API](#2-cómo-empezar-a-testear-la-api)
 3. [Descripción de la API](#3-descripción-de-la-api)
-4. [Interfaz de dispositivo /api/device/](#4-interfaz-de-dispositivo-apidevice)
+4. [Interfaz de dispositivo](#4-interfaz-de-dispositivo-apidevice)
     - 4.1. [Métodos de dispositivo](#41-métodos-de-dispositivo)
-5. [Interfaz de programa /api/program/](#5-interfaz-de-programa-apiprogram)
+	- 4.2  [Lista de dispositivos en línea](#42-lista-de-dispositivos-en-línea-apidevicelist)
+5. [Interfaz de programa](#5-interfaz-de-programa-apiprogram)
     - 5.1. [Estructura de los programas (JSON)](#51-estructura-de-los-programas-json)
     - 5.2. [Métodos de programa](#52-métodos-de-programa)
     - 5.3. [Control de reproducción de programa](#53-control-de-reproducción-de-programa)
@@ -15,12 +16,12 @@ Documentación HTTP API para FULL COLOR SDK
     - 5.5. [Ítem de imagen](#55-ítem-de-imagen)
     - 5.6. [Ítem de video](#56-ítem-de-video)
     - 5.7. [Ítem de reloj digital](#57-ítem-de-reloj-digital)
-    - 5.8. [Programa de reloj analógico](#58-programa-de-reloj-analógico)
+    - 5.8. [Item de reloj analógico](#58-ítem-de-reloj-analógico)
     - 5.9. [Ítem de área dinámica](#59-ítem-de-área-dinámica)
-6. [Interfaz de archivo /api/file/](#6-interfaz-de-archivo-apifile)
+6. [Interfaz de archivo](#6-interfaz-de-archivo-apifile)
     - 6.1. [Cómo usar archivos subidos con la API](#61-cómo-usar-archivos-subidos-con-la-api)
     - 6.2. [Alternativa: subir archivos con RemoteServer.exe](#62-alternativa-subir-archivos-con-remoteserverexe)
-7. [Interfaz de captura de pantalla /api/screenshot/](#7-interfaz-de-captura-de-pantalla-apiscreenshot)
+7. [Interfaz de captura de pantalla](#7-interfaz-de-captura-de-pantalla-apiscreenshot)
 8. [Apéndices](#8-apéndices)
     - 8.1. [Apéndice 1: Efectos](#81-apéndice-1-efectos)
     - 8.2. [Apéndice 2: Bordes](#82-apéndice-2-bordes)
@@ -1647,7 +1648,7 @@ Todos los atributos se combinan con **AND lógico**. Se activa la reproducción 
 ```
 
 ---
-## 5.8 Programa de reloj analógico
+## 5.8 Ítem de reloj analógico
 
 **Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
 **Content-Type:** `application/json`
@@ -2166,6 +2167,6 @@ Lista sacada de la documentación del protocolo SDK "SDK3.0 Manual.pdf".
 Documentación original:
 https://gitee.com/szhuidu/cn.huidu.device.sdk/blob/master/README.en.md
 
-Traducido, modificado y expandido. 2026
+Esta guía está basada en la documentación original de Hudiu, y la información ha sido rectificada, ampliada y mejorada. 2026
 
 *Ejemplos probados en HD-C16L SDK con firmware 7.11.18.0 y hardware v1.0.*
