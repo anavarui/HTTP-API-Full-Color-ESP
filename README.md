@@ -93,7 +93,9 @@ Estas claves son necesarias para el proceso de firma de la petición HTTP.
 La API opera sobre HTTP en el puerto 30080. Las peticiones deben estar codificadas en JSON, e incluyen un método (`method`) y sus parámetros (`data`) en el cuerpo de la solicitud (el parámetro `id` es opcional). La respuesta también se devuelve en formato JSON.
 
 ***Ejemplo de una llamada a la API para ajustar el brillo al 50%:***
+
 Endpoint: `POST 192.168.1.13:30080/api/device/C16L-D24-00622`
+
 Cuerpo (JSON):
 ```json
 {
