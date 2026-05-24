@@ -3,25 +3,37 @@ Documentación HTTP API para FULL COLOR SDK
 
 # Contenido
 1. [Introducción](#1-introducción)
-2. [Guía rápida de Postman](#2-guía-rápida-de-postman)
-3. [Guía rápida de HDPlayer](#3-guía-rápida-de-hdplayer)
-4. [Descripción de la API HTTP](#4-descripción-de-la-api-http)
-5. [/api/device/ - Interfaz de dispositivo](#5-apidevice---interfaz-de-dispositivo)
-6. [/api/program/ - Interfaz de programa](#6-apiprogram---interfaz-de-programa)
-7. [/api/file/ - Interfaz de archivo](#7-apifile---interfaz-de-archivo)
-8. [/api/screenshot/ - Interfaz de capturas de pantalla](#8-apiscreenshot---interfaz-de-captura-de-pantalla)
-9. [Apéndices](#9-apéndices)
+2. [Cómo empezar a testear la API](#2-cómo-empezar-a-testear-la-api)
+3. [Descripción de la API](#3-descripción-de-la-api)
+4. [Interfaz de dispositivo /api/device/](#4-interfaz-de-dispositivo-apidevice)
+    - 4.1. [Métodos de dispositivo](#41-métodos-de-dispositivo)
+5. [Interfaz de programa /api/program/](#5-interfaz-de-programa-apiprogram)
+    - 5.1. [Estructura de los programas (JSON)](#51-estructura-de-los-programas-json)
+    - 5.2. [Métodos de programa](#52-métodos-de-programa)
+    - 5.3. [Control de reproducción de programa](#53-control-de-reproducción-de-programa)
+    - 5.4. [Ítem de texto](#54-ítem-de-texto)
+    - 5.5. [Ítem de imagen](#55-ítem-de-imagen)
+    - 5.6. [Ítem de video](#56-ítem-de-video)
+    - 5.7. [Ítem de reloj digital](#57-ítem-de-reloj-digital)
+    - 5.8. [Programa de reloj analógico](#58-programa-de-reloj-analógico)
+    - 5.9. [Ítem de área dinámica](#59-ítem-de-área-dinámica)
+6. [Interfaz de archivo /api/file/](#6-interfaz-de-archivo-apifile)
+    - 6.1. [Cómo usar archivos subidos con la API](#61-cómo-usar-archivos-subidos-con-la-api)
+    - 6.2. [Alternativa: subir archivos con RemoteServer.exe](#62-alternativa-subir-archivos-con-remoteserverexe)
+7. [Interfaz de captura de pantalla /api/screenshot/](#7-interfaz-de-captura-de-pantalla-apiscreenshot)
+8. [Apéndices](#8-apéndices)
+    - 8.1. [Apéndice 1: Efectos](#81-apéndice-1-efectos)
+    - 8.2. [Apéndice 2: Bordes](#82-apéndice-2-bordes)
+    - 8.3. [Apéndice 3: Lista de fuentes disponibles](#83-apéndice-3-lista-de-fuentes-disponibles)
+    - 8.4. [Apéndice 4: Lista de códigos de error SDK](#84-apéndice-4-lista-de-códigos-de-error-sdk)
+
+Anexo 1. [Guía rápida de Postman](POSTMAN-QUICKSTART.md)
+Anexo 2. [Guía rápida de HDPlayer](HDPLAYER-QUICKSTART.md)
 
 
 # 1. Introducción
 
-## 1.1 Público objetivo
-Los lectores deben tener conocimientos básicos de:
-1. Comprensión de los protocolos HTTPS/HTTP, etc.
-2. Conceptos básicos de seguridad de la información.
-3. Al menos un lenguaje de programación.
-
-## 1.2 Resumen
+## 1.1 Resumen
 
 Este manual detalla cómo usar la API para el desarrollo de integraciones con nuestras pantallas Full Color SDK.
 
@@ -31,11 +43,16 @@ Tenga en cuenta que únicamente los dispositivos con una 'D' en medio de la ID d
 
 Este manual explica en detalle las interfaces del sistema y se incluyen ejemplos de uso implementados en Postman, con los que el personal técnico podrá entenderlas rápidamente y empezar a desarrollar.
 
-> NOTA: Es muy recomendable familiarizarse antes con las funciones disponibles en la pantalla usando el software propietario HDPlayer, explicado más abajo.
+Los lectores deben tener conocimientos básicos de:
+1. Comprensión de los protocolos HTTPS/HTTP, etc.
+2. Conceptos básicos de seguridad de la información.
+3. Al menos un lenguaje de programación.
 
-## 1.3 Comunicación con los dispositivos
+> NOTA: Es muy recomendable familiarizarse antes con las funciones disponibles en la pantalla usando el software propietario HDPlayer, explicado en el anexo [Guía rápida de HDPlayer](HDPLAYER-QUICKSTART.md).
 
-La API usa el protocolo HTTP sobre el puerto `30080`. La información se transmite al dispositivo en formato json.
+## 1.2 Comunicación con los dispositivos
+
+La comunicación se realiza mediante solicitudes HTTP al puerto 30080 del dispositivo. El cuerpo de la petición y la respuesta están codificados en JSON.
 
 **Acceso directo a un dispositivo**
 
@@ -45,7 +62,7 @@ La API usa el protocolo HTTP sobre el puerto `30080`. La información se transmi
 **Acceso indirecto mediante un servidor SDK (ubuntu/windows) con varios dispositivos (NO DISPONIBLE AÚN)**
 ![](images/Esquema%202.png)
 
-## 1.4 Registrarse en la plataforma para obtener las claves sdkKey y sdkSecret
+## 1.3 Registrarse en la plataforma para obtener las claves sdkKey y sdkSecret
 
 La plataforma de registro no está abierta para el público aún. Los clientes que deseen desarrollar con la API deben registrarse con nosotros para que les facilitemos la clave pública y privada, llamadas `sdkKey` y `sdkSecret` respectivamente. 
 
@@ -58,139 +75,48 @@ Esto debe hacerse idealmente antes o durante el proceso de pedido de la pantalla
 
 Estas claves son necesarias para el proceso de firma de la petición HTTP.
 
-## 1.5 Cómo empezar a testear la API
+# 2. Cómo empezar a testear la API
 
 1. Conecte la pantalla a su red local.
-2. Sigue los pasos de "Guía rápida de Postman" para importar la colección de ejemplos
-3. Sigue los pasos de "Guía rápida de HDPlayer" para detectar la ID e IP del dispositivo
+2. Sigue los pasos de la [Guía rápida de Postman](POSTMAN-QUICKSTART.md) para importar la colección de ejemplos
+3. Sigue los pasos de [Guía rápida de HDPlayer](HDPLAYER-QUICKSTART.md) para detectar la ID e IP del dispositivo
 4. Introduce los valores de `sdkKey`, `sdkSecret`, `ip` y `deviceid` en Postman como dice la guía rápida
 5. Prueba un ejemplo como "Get device information" para probar que funciona todo correctamente.
 
 ---
 
-# 2. Guía rápida de Postman
-Solo te llevará unos minutos y ya podrás empezar a testear la API. Vamos paso a paso.
+# 3. Descripción de la API
 
-## 2.1 Instalar Postman
+## 3.1 Vista general
+La API opera sobre HTTP en el puerto 30080. Las peticiones deben estar codificadas en JSON, e incluyen un método (`method`) y sus parámetros (`data`) en el cuerpo de la solicitud (el parámetro `id` es opcional). La respuesta también se devuelve en formato JSON.
 
-Descarge Postman de su página web oficial [postman.com](https://www.postman.com/downloads/) e instale el software.
-
-Inicie sesión para poder importar la colección.
-![](images/Pasted%20image%2020260519205100.png)
-
-## 2.2 Importar la collección
-
-Pulsa en `Import`.
-
-![](images/Pasted%20image%2020260519210042.png)
-
-Arrastra el archivo .json dentro.
-
-![](images/Pasted%20image%2020260519210050.png)
-
-## 2.3 Configurar variables de entorno
-
-Una vez importada la colección, ahora vamos a `Create Enviroment` y pon un nombre al nuevo ambiente.
-
-![](images/Pasted%20image%2020260519210058.png)
-
-Creamos las siguientes variables:
-
-`ip` - la IP del  (puedes verla con HDPlayer)
-`deviceid` - la ID del dispositivo (puedes verla con HDPlayer)
-`sdkKey` - clave pública, ofrecida durante el registro
-`sdkSecret` - clave privada, ofrecida durante el registro
-
-![](images/Pasted%20image%2020260519210109.png)
-
-Ya podemos probar los ejemplos. Abrimos cualquiera, por ejemplo "Get device status" pulsamos SEND.
-
-![](images/Pasted%20image%2020260519210121.png)
-
->NOTA: Los ejemplos de programas están diseñados para una pantalla de 128 x 64 px. Hay que modificar manualmente los valores `width` y `height` que encontrarás en el cuerpo de la petición.
-
----
-
-# 3. Guía rápida de HDPlayer
-Para que puedas aprender rápidamente las funciones principales que vas a necesitar, como detectar el dispositivo en línea.
-
-## 3.1 Instalar HDPlayer
-
-![](images/HDPlayer_128x128_32bit.png)
-
-HDPlayer es el software propietario para Windows para gestionar y controlar la pantalla en red local. Lo usaremos inicialmente para hacer ajustes y detectar la pantalla.
-
-Puedes descargar la **última versión de HDPlayer** y el **manual completo** [aquí](https://www.hdwell.com/Download/)
-
-![](images/Pasted%20image%2020260519124432.png)
-*Software HDPlayer*
-
-## 3.2 Detectar pantalla y encontrar IP e ID de dispositivo con HDPlayer
-
-Vaya a la lista de dispositivos LED haciendo clic en la esquina inferior:
-
-![](images/Pasted%20image%2020260519205359.png)
-
-En esta ventana podrá ver las direcciones IP de todas las pantallas en red local y sus respectivos ID de dispositivo.
-
-NOTA: El SDK solo funcionará con las pantallas habilitadas para SDK. Estas pantallas contienen una D en el nombre: C16L-Dxx-xxxxx.
-
-## 3.3 Asignar una IP fija
-
-En HDPlayer vaya a Control > Información de dispositivo y en la nueva ventana selecciona la pestaña “Configuración de red”.
-
-![](images/Pasted%20image%2020260519130044.png)
-
-Desmarcar “Adquisición automática” y rellenar los campos con los valores de red deseados. Pulsa en "determinar" para enviar la configuración.
-
-## 3.4 Creación de programas en HDPlayer
->Esta sección es meramente informativa. La API permite realizar las funciones básicas de HDPlayer.
-
-En HDplayer entendemos la creación de un diseño de pantalla como una lista de programas. Cada programa contiene áreas con distintas funciones, área de texto, área de imagen, área de vídeo, y otras áreas con funciones especiales como fecha y hora. Cada área tiene una posición y tamaño configurable.
-
-
-![](images/Pasted%20image%2020260519124514.png)
-*Algunas de las distintas áreas disponibles*
-
-La elaboración de una pantalla tiene una estructura anidada, donde primero tenemos una pantalla, por debajo tenemos la lista de programas, y cada programa tiene sus elementos o áreas.
-
-![](images/Pasted%20image%2020260519124731.png)
-*Estructura de una pantalla con 4 programas*
-
-Una vez creados nuestros programas, estos se reproducirán en bucle.
-
-
-![](images/Pasted%20image%2020260519124834.png)
-
-Para transmitir el diseño que acabamos de crear, nos conectaremos a la pantalla. Esta debe estar conectada en la misma red local, o bien realizar una conexión directa por Wifi o con cable ethernet a nuestro ordenador. Veremos en la esquina inferior el nombre de nuestra pantalla en color azul en cuanto el programa detecte la pantalla. Si el texto aparece en rojo no hay conexión.
-
-![](images/Pasted%20image%2020260519125002.png)
-*Pantalla detectada*
-
-Hacemos clic en Transmitir. La información se quedará guardada en la memoria interna de la pantalla.
-
-![](images/Pasted%20image%2020260519125020.png)
-
----
-
-
-# 4. Descripción de la API HTTP
-
-## 4.1 Descripción general del cuerpo (JSON)
-El cuerpo debe estar en formato JSON y contiene principalmente los parámetros `method` y `data`. El parámetro `id` es opcional (consultar siguiente punto "Cómo especificar la ID de dispositivo").
-
-Ejemplo de un cuerpo de una petición para cambiar el brillo al 50%:
+***Ejemplo de una llamada a la API para ajustar el brillo al 50%:***
+Endpoint: `POST 192.168.1.13:30080/api/device/C16L-D24-00622`
+Cuerpo (JSON):
 ```json
 {
-	"id": "C16L-D24-00622",
     "method": "setDeviceProperty",
     "data": {
         "luminance": "50"
     }
 }
 ```
+Respuesta:
+```json
+{
+    "method": "setDeviceProperty",
+    "message": "ok",
+    "data": [
+        {
+            "id": "C16L-D24-00622",
+            "message": "ok",
+            "data": "kSuccess"
+        }
+    ]
+}
+```
 
-## 4.2 Cómo especificar la ID de dispositivo (en caso de usar un server SDK)
+## 3.2 Formas de especificar la ID
 >En caso de una conexión directa con un dispositivo no es obligatorio especificar la ID, excepto en algunos casos (véase "Método `getAll`").
 
 Para especificar el dispositivo que queremos controlar se pueden las siguientes formas:
@@ -208,7 +134,7 @@ Para especificar el dispositivo que queremos controlar se pueden las siguientes 
 }
 ```
 
-## 4.3 Mecanismo de firma
+## 3.3 Mecanismo de firma
 
 El dispositivo viene de fábrica con las claves `sdkKey` y `sdkSecret` inicializadas. Si no fuera así, contáctenos.
 
@@ -216,7 +142,7 @@ Todas las llamadas a la interfaz de la API utilizan `sdkKey` y `sdkSecret` (la c
 
 Hay dos reglas de firma:
 
-### 4.3.1 Regla 1 (General):
+### 3.3.1 Regla 1 (General):
 
 `sign = HMACMD5(body + sdkKey + date, sdkSecret)`
 
@@ -230,13 +156,13 @@ Donde:
     `sdkSecret`: ofrecido durante el registro (clave secreta, no se transmite)
     
 
-### 4.3.2 Regla 2 (Usada solo para la interfaz de archivos):
+### 3.3.2 Regla 2 (Usada solo para la interfaz de archivos):
 Para la interfaz de archivos se deja el cuerpo de la solicitud fuera:
 
 `sign = HMACMD5(sdkKey + date, sdkSecret)`
 
 
-### 4.3.3 Ejemplo de un encabezado firmado
+### 3.3.3 Ejemplo de un encabezado firmado
 
 ```
 requestId: da7ddf89-c102-4fb4-95e7-a8f7a72e697e
@@ -251,7 +177,7 @@ Connection: keep-alive
 Content-Length: 72
 ```
 
-## 4.4 Interfaces de la API
+## 3.4 Interfaces de la API
 Hay principalmente 4 interfaces:
  
 | Interfaz         | Descripción                                   | 
@@ -267,23 +193,27 @@ Hay principalmente 4 interfaces:
 ---
 
 
-# 5. /api/device/ - Interfaz de dispositivo
+# 4. Interfaz de dispositivo /api/device/
 
-## 5.1 Métodos
-### 5.1.1 getDeviceProperty - Obtener las propiedades del dispositivo
->Con este método puedes leer las propiedades como el brillo, la hora interna, la versión de firmware, etc. Más abajo tienes una lista de los atributos disponibles.
+La interfaz de dispositivo se utiliza principalmente para operar propio dispositivo (ajustar brillo, apagar/encender...) como para obtener información del estado del dispositivo.
 
-URL de la interfaz: `127.0.0.1:30080/api/device/{{Id}}`
-Content-Type: `application/json`
-Método de solicitud: `POST`
+## 4.1 Métodos de dispositivo
 
-Parámetros del encabezado de la solicitud:
+### 4.1.1 getDeviceProperty
+***Obtener las propiedades del dispositivo***
 
-| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio | Descripción |
-| --------- | ------------------- | ------ | ----------- | ----------- |
-| sdkKey    | a7fa6795aaa891e2    | String | Sí          | Sin descripción |
+>Con este método puedes leer las propiedades como el brillo, la hora interna, la versión de firmware, etc.
 
-**Ejemplo del cuerpo de la solicitud:**
+**Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+**Content-Type:** `application/json`
+
+**Headers:**
+
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
+
+**Request body — ejemplo:**
 
 ```json
 {
@@ -292,7 +222,7 @@ Parámetros del encabezado de la solicitud:
 }
 ```
 
-**Ejemplo de respuesta:**
+**Respuesta — ejemplo:**
 
 ```json
 {
@@ -335,48 +265,48 @@ Parámetros del encabezado de la solicitud:
 
 **Atributos del dispositivo**
 
-|Atributo|Descripción|Valores | Editable |
-| --- | --- | --- | --- |
-|`name`|Nombre del dispositivo.<br>Se puede cambiar para identificar mejor el dispositivo|String<br>"BoxPlayer" por defecto|Sí|
-|`sync`|Sincronización multipantalla|String<br>"false" por def.|Editable, pero consulte el manual de HDPlayer|
-|`screen.width`|Ancho de la pantalla|String     |Sí. No modificar     |
-|`screen.height`|Alto de la pantalla|String     |Sí. No modificar     |
-|`screen.rotation`|Rotación de la pantalla|0, 90, 180, 270|No editable<br> Usar HDPlayer para cambiarlo|
-|`version.hardware`|Versión del hardware|     |No|
-|`version.fpga`|Versión del FPGA|     |No|
-|`version.app`|Versión de firmware|     |No|
-|`time`|Hora/fecha del dispositivo|     |Sí|
-|`time.timeZone`|Zona horaria|     |Sí, pero recomendamos cambiarla desde HDPlayer|
-|`time.sync`|Modo de sincronización de la hora|“none” - desactivado<br>“ntp” - servidor ntp|Sí|
-|`time.ntp`|URL del servidor ntp|String|Sí|
-|`volume`|Volumen de sonido. Nuestras pantallas no disponen de salida de señal de audio, excepto a petición del cliente|String<br>"0" a "100"|Editable, pero no modifica las franjas horarias en el modo “ploys”|
-|`volume.mode`|Modo de volumen|“default” - volumen fijo<br>“ploys” - volumen variable por franjas horarias|Sí|
-|`luminance`|Brillo de la pantalla|String<br>"1" a "100"|Editable, pero no modifica las franjas horarias en el modo “ploys”|
-|`luminance.mode`|Modo de brillo|“default” - brillo fijo<br>“ploys” - brillo variable por franjas horarias<br>“sensor” - brillo automático. Nuestras pantallas no disponen de sensor de luz a no ser que lo solicite el cliente|Sí|
-|`eth.dhcp`|DHCP|     |No|
-|`eth.ip`|Dirección IP|     |No|
-|`wifi.enabled`|Indica si el Wi-Fi está habilitado|     |No|
-|`wifi.mode`|Modo Wi-Fi|"ap" o "station"|No|
-|`wifi.ap.ssid`|Modo ap: SSID del punto de acceso|     |No|
-|`wifi.ap.passwd`|Modo ap: Contraseña del punto de acceso|     |No|
-|`wifi.ap.channel`|Modo ap: Canal del punto de acceso|     |No|
+| Atributo           | Descripción                                                                                                   | Valores                                                                                                                                                                                        | Editable                                                           |
+| ------------------ | ------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| `name`             | Nombre del dispositivo.<br>Se puede cambiar para identificar mejor el dispositivo                             | String<br>"BoxPlayer" por defecto                                                                                                                                                              | Sí                                                                 |
+| `sync`             | Sincronización multipantalla                                                                                  | String<br>"false" por def.                                                                                                                                                                     | Editable, pero consulte el manual de HDPlayer                      |
+| `screen.width`     | Ancho de la pantalla                                                                                          | String                                                                                                                                                                                         | Sí. No modificar                                                   |
+| `screen.height`    | Alto de la pantalla                                                                                           | String                                                                                                                                                                                         | Sí. No modificar                                                   |
+| `screen.rotation`  | Rotación de la pantalla                                                                                       | 0, 90, 180, 270                                                                                                                                                                                | No editable<br> Usar HDPlayer para cambiarlo                       |
+| `version.hardware` | Versión del hardware                                                                                          |                                                                                                                                                                                                | No                                                                 |
+| `version.fpga`     | Versión del FPGA                                                                                              |                                                                                                                                                                                                | No                                                                 |
+| `version.app`      | Versión de firmware                                                                                           |                                                                                                                                                                                                | No                                                                 |
+| `time`             | Hora/fecha del dispositivo                                                                                    |                                                                                                                                                                                                | Sí                                                                 |
+| `time.timeZone`    | Zona horaria                                                                                                  |                                                                                                                                                                                                | Sí, pero recomendamos cambiarla desde HDPlayer                     |
+| `time.sync`        | Modo de sincronización de la hora                                                                             | “none” - desactivado<br>“ntp” - servidor ntp                                                                                                                                                   | Sí                                                                 |
+| `time.ntp`         | URL del servidor ntp                                                                                          | String                                                                                                                                                                                         | Sí                                                                 |
+| `volume`           | Volumen de sonido. Nuestras pantallas no disponen de salida de señal de audio, excepto a petición del cliente | String<br>"0" a "100"                                                                                                                                                                          | Editable, pero no modifica las franjas horarias en el modo “ploys” |
+| `volume.mode`      | Modo de volumen                                                                                               | “default” - volumen fijo<br>“ploys” - volumen variable por franjas horarias                                                                                                                    | Sí                                                                 |
+| `luminance`        | Brillo de la pantalla                                                                                         | String<br>"1" a "100"                                                                                                                                                                          | Editable, pero no modifica las franjas horarias en el modo “ploys” |
+| `luminance.mode`   | Modo de brillo                                                                                                | “default” - brillo fijo<br>“ploys” - brillo variable por franjas horarias<br>“sensor” - brillo automático. Nuestras pantallas no disponen de sensor de luz a no ser que lo solicite el cliente | Sí                                                                 |
+| `eth.dhcp`         | DHCP                                                                                                          |                                                                                                                                                                                                | No                                                                 |
+| `eth.ip`           | Dirección IP                                                                                                  |                                                                                                                                                                                                | No                                                                 |
+| `wifi.enabled`     | Indica si el Wi-Fi está habilitado                                                                            |                                                                                                                                                                                                | No                                                                 |
+| `wifi.mode`        | Modo Wi-Fi                                                                                                    | "ap" o "station"                                                                                                                                                                               | No                                                                 |
+| `wifi.ap.ssid`     | Modo ap: SSID del punto de acceso                                                                             |                                                                                                                                                                                                | No                                                                 |
+| `wifi.ap.passwd`   | Modo ap: Contraseña del punto de acceso                                                                       |                                                                                                                                                                                                | No                                                                 |
+| `wifi.ap.channel`  | Modo ap: Canal del punto de acceso                                                                            |                                                                                                                                                                                                | No                                                                 |
 
-
-### 5.1.2 SetDeviceProperty - Cambiar atributos del dispositivo
+---
+### 4.1.2 SetDeviceProperty
+***Cambiar atributos del dispositivo***
 
 >Algunas propiedades son de solo lectura y no se pueden cambiar. Consultar la tabla de más arriba.
 
-URL de la interfaz: `127.0.0.1:30080/api/device/{{Id}}`
-Content-Type: `application/json`
-Método de solicitud: `POST`
+**Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+**Content-Type:** `application/json`
 
-Parámetros del encabezado de la solicitud:
+**Headers:**
 
-| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio | Descripción |
-| --------- | ------------------- | ------ | ----------- | ----------- |
-| sdkKey    | a7fa6795aaa891e2    | String | Sí          | Sin descripción |
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
 
-**Ejemplo del cuerpo de la solicitud:**
+**Request body — ejemplo:**
 
 ```json
 {
@@ -389,7 +319,7 @@ Parámetros del encabezado de la solicitud:
 }
 ```
 
-**Ejemplo de respuesta:**
+**Respuesta — ejemplo:**
 
 ```json
 {
@@ -405,20 +335,22 @@ Parámetros del encabezado de la solicitud:
 }
 ```
 
-### 5.1.3 getDeviceStatus - Obtener el estado del dispositivo
+---
+### 4.1.3 getDeviceStatus
+***Obtener el estado del dispositivo***
+
 >Principalmente para saber si la pantalla está encendida o en stand-by, además de algunas propiedades como la IP, etc.
 
-URL de la interfaz: `127.0.0.1:30080/api/device/{{Id}}`
-Content-Type: `application/json`
-Método de solicitud: `POST`
+**Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+**Content-Type:** `application/json`
 
-Parámetros del encabezado de la solicitud:
+**Headers:**
 
-| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio | Descripción |
-| --------- | ------------------- | ------ | ----------- | ----------- |
-| sdkKey    | a7fa6795aaa891e2    | String | Sí          | Sin descripción |
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
 
-**Ejemplo del cuerpo de la solicitud:**
+**Request body — ejemplo:**
 
 ```json
 {
@@ -427,7 +359,7 @@ Parámetros del encabezado de la solicitud:
 }
 ```
 
-**Ejemplo de respuesta:**
+**Respuesta — ejemplo:**
 
 ```json
 {
@@ -464,11 +396,24 @@ Parámetros del encabezado de la solicitud:
 |`wifi.enabled`|wifi habilitado/deshabilitado|
 |`wifi.mode`|"ap"/"station"|
 
+___
+### 4.1.4 getScheduledTask
+***Obtener el horario del dispositivo***
 
-### 5.1.4 getScheduledTask - Leer la configuración por franjas horarias del dispositivo
 >Para leer los horarios de brillo, apagado/encendido, etc. que se han establecido previamente con `"setScheduledTask/updateScheduledTask"`.
 >
 >NOTA: con este método no es posible leer los horarios establecidos con HDPlayer.
+
+**Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+**Content-Type:** `application/json`
+
+**Headers:**
+
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
+
+**Parámetros**
 
 |Parámetro|Descripción|`"data"`|
 | --- | --- | --- |
@@ -478,16 +423,7 @@ Parámetros del encabezado de la solicitud:
 |`relay`|Horarios para el relé integrado (normalmente no usado)|"false" "true"|
 
 
-URL de la interfaz: `127.0.0.1:30080/api/device/{{Id}}`
-Content-Type: `application/json`
-Método de solicitud: `POST`
-
-
-| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio | Descripción |
-| --------- | ------------------- | ------ | ----------- | ----------- |
-| sdkKey    | a7fa6795aaa891e2    | String | Sí          | Sin descripción |
-
-**Ejemplo del cuerpo de la solicitud:**
+**Request body — ejemplo:**
 
 ```json
 {
@@ -502,7 +438,7 @@ Método de solicitud: `POST`
 ```
 
 
-**Ejemplo de respuesta:**
+**Respuesta — ejemplo:**
 
 ```json
 {
@@ -559,7 +495,10 @@ Método de solicitud: `POST`
 }
 ```
 
-### 5.1.5 setScheduledTask/updateScheduledTask - Establecer/actualizar la configuración por franjas horarias del dispositivo
+---
+### 4.1.5 setScheduledTask / updateScheduledTask
+***Establecer/actualizar el horario del dispositivo***
+
 >Puedes establecer con este método un horario de encendido/apagado o de cambio de brillo por horas.
 >
 >NOTA: En el caso del brillo y el volumen es posible que no produzca un cambio inmediato, pues solo entra en efecto en las horas de cambio que se han establecido. Con un cambio de horario de brillo se recomienda actualizar manualmente el brillo con `"SetDeviceProperty"`.
@@ -575,18 +514,16 @@ Hay dos métodos para cambiar los horarios:
 |`luminance`|Franjas horarias para el brillo|
 |`relay`|Franjas horarias para el relé integrado (normalmente no usado)|
 
+**Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+**Content-Type:** `application/json`
 
-URL de la interfaz: `127.0.0.1:30080/api/device/{{Id}}`
-Content-Type: `application/json`
-Método de solicitud: `POST`
+**Headers:**
 
-Parámetros del encabezado de la solicitud:
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
 
-| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio | Descripción |
-| --------- | ------------------- | ------ | ----------- | ----------- |
-| sdkKey    | a7fa6795aaa891e2    | String | Sí          | Sin descripción |
-
-**Ejemplo del cuerpo de la solicitud:**
+**Request body — ejemplo:**
 
 ```json
 {
@@ -643,7 +580,7 @@ Parámetros del encabezado de la solicitud:
 }
 ```
 
-**Ejemplo de respuesta:**
+**Respuesta — ejemplo:**
 
 ```json
 {
@@ -659,27 +596,25 @@ Parámetros del encabezado de la solicitud:
 }
 ```
 
-### 5.1.6 pushStatus - Push proactivo (para área dinámica)
+### 4.1.6 pushStatus
+***Push proactivo (para área dinámica)***
+
 >Establece el valor de las variables que hemos usado con un programa de área dinámica (ver sección y ejemplo de un área dinámica, en los métodos de la interfaz de programa).
 >
 >💡 Cómo probar este ejemplo:
-> 1. En los ejemplos de Postman abre "Dynamic area" y mándalo
-> 2. Abre este ejemplo "Proactive push" y mándalo
+> 1. En los ejemplos de Postman abre "Dynamic area" y envíalo
+> 2. Abre este ejemplo "Proactive push" y envíalo
 
+**Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+**Content-Type:** `application/json`
 
-URL de la interfaz: `127.0.0.1:30080/api/device/{{Id}}`
+**Headers:**
 
-Content-Type: `application/json`
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
 
-Método de solicitud: `POST`
-
-Parámetros del encabezado de la solicitud:
-
-| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio | Descripción |
-| --------- | ------------------- | ------ | ----------- | ----------- |
-| sdkKey    | a7fa6795aaa891e2    | String | Sí          | Sin descripción |
-
-**Ejemplo del cuerpo de la solicitud:**
+**Request body — ejemplo:**
 
 ```json
 {
@@ -691,7 +626,7 @@ Parámetros del encabezado de la solicitud:
 }
 ```
 
-**Ejemplo de respuesta:**
+**Respuesta — ejemplo:**
 
 ```json
 {
@@ -707,7 +642,9 @@ Parámetros del encabezado de la solicitud:
 }
 ```
 
-### 5.1.7 setPeriodicTask - Establecer tarea periódica de actualización  por URL (para áreas dinámicas)
+### 4.1.7 setPeriodicTask
+***Establecer tarea periódica de actualización por URL (para áreas dinámicas)***
+
 >Permite configurar una tarea periódica para actualizar las variables de una área dinámica a partir de una URL (ver sección "área dinámica").
 >
 >💡 Cómo probar este ejemplo:
@@ -715,18 +652,16 @@ Parámetros del encabezado de la solicitud:
 > 2. Hacer un servidor web que devuelva el texto plano `"ParkingSpace,110 Temperature,25"`
 > 3. Abre el ejemplo en Postman "Set periodic task" y cambia las URLs a tu servicio web.
 
+**Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+**Content-Type:** `application/json`
 
-URL de la interfaz: `127.0.0.1:30080/api/device/{{Id}}`
-Content-Type: `application/json`
-Método de solicitud: `POST`
+**Headers:**
 
-Parámetros del encabezado de la solicitud:
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
 
-|**Parámetro**|**Valor de ejemplo**|**Tipo**|**Obligatorio**|**Descripción**|
-|---|---|---|---|---|
-|sdkKey|a7fa6795aaa891e2|String|Sí|Sin descripción|
-
-Parámetros del cuerpo de la solicitud:
+**Parámetros del cuerpo de la solicitud:**
 
 |**Parámetro**|**Valor de ejemplo**|**Tipo**|**Obligatorio**|**Descripción**|
 |---|---|---|---|---|
@@ -766,7 +701,7 @@ Temperature,25
 
 El motor regex del dispositivo solo captura **el primer par clave-valor** que coincide dentro de un único patrón `rege`. Para múltiples variables desde la misma URL, **cree una entrada de tarea separada por cada variable**. El ejemplo muestra cómo.
 
-**Ejemplo de respuesta:**
+**Respuesta — ejemplo:**
 ```json
 {
     "method": "setPeriodicTask",
@@ -781,15 +716,21 @@ El motor regex del dispositivo solo captura **el primer par clave-valor** que 
 }
 ```
 
-### 5.1.8 getPeriodicTask - Obtener la tarea periódica de actualización  por URL (para áreas dinámicas)
+### 4.1.8 getPeriodicTask
+***Obtener la tarea periódica de actualización por URL (para áreas dinámicas)***
 
 >Lee la tarea de actualización que hemos establecido en el apartado anterior, usado en áreas dinámicas (ver sección y ejemplo de un área dinámica, en los métodos de la interfaz de programa).
 
-URL de la interfaz: `127.0.0.1:30080/api/device/{{Id}}`
-Content-Type: `application/json`
-Método de solicitud: `POST`
+**Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+**Content-Type:** `application/json`
 
-Ejemplo del cuerpo de la solicitud:
+**Headers:**
+
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
+
+**Request body — ejemplo:**
 
 ```json
 {
@@ -798,7 +739,7 @@ Ejemplo del cuerpo de la solicitud:
 }
 ```
 
-Ejemplo de respuesta:
+**Respuesta — ejemplo:**
 
 ```json
 {
@@ -827,26 +768,27 @@ Ejemplo de respuesta:
 
 
 
-### 5.1.9 rebootDevice - Reiniciar dispositivo
+### 4.1.9 rebootDevice
+***Reiniciar dispositivo***
+
 >Reinicia el dispositivo tras unos segundos.
 
+**Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+**Content-Type:** `application/json`
+
+**Headers:**
+
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
+
+**Parámetros:**
 
 | Parámetro | Valor   | Obligatorio |
 | --------- | ------ | ----------- |
-| `delay`    |  int (segundos) | No         |
+| `delay`    | int (segundos) | No         |
 
-
-URL de la interfaz: `127.0.0.1:30080/api/device/{{Id}}`
-Content-Type: `application/json`
-Método de solicitud: `POST`
-
-Parámetros del encabezado de la solicitud: Reiniciar después de unos segundos.
-
-| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio | Descripción |
-| --------- | ------------------- | ------ | ----------- | ----------- |
-| sdkKey    | a7fa6795aaa891e2    | String | Sí          | Sin descripción |
-
-**Ejemplo del cuerpo de la solicitud:**
+**Request body — ejemplo:**
 
 ```json
 {
@@ -857,7 +799,7 @@ Parámetros del encabezado de la solicitud: Reiniciar después de unos segundos.
 }
 ```
 
-**Ejemplo de respuesta:**
+**Respuesta — ejemplo:**
 
 ```json
 {
@@ -873,20 +815,21 @@ Parámetros del encabezado de la solicitud: Reiniciar después de unos segundos.
 }
 ```
 
-### 5.1.10 openDeviceScreen - Encender pantalla
+### 4.1.10 openDeviceScreen
+***Encender pantalla***
+
 >Enciende la pantalla si ésta está apagada (stand-by).
 
-URL de la interfaz: `127.0.0.1:30080/api/device/{{Id}}`
-Content-Type: `application/json`
-Método de solicitud: `POST`
+**Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+**Content-Type:** `application/json`
 
-Parámetros del encabezado de la solicitud:
+**Headers:**
 
-| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio | Descripción |
-| --------- | ------------------- | ------ | ----------- | ----------- |
-| sdkKey    | a7fa6795aaa891e2    | String | Sí          | Sin descripción |
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
 
-**Ejemplo del cuerpo de la solicitud:**
+**Request body — ejemplo:**
 
 ```json
 {
@@ -895,7 +838,7 @@ Parámetros del encabezado de la solicitud:
 }
 ```
 
-**Ejemplo de respuesta:**
+**Respuesta — ejemplo:**
 
 ```json
 {
@@ -911,20 +854,21 @@ Parámetros del encabezado de la solicitud:
 }
 ```
 
-### 5.1.11 closeDeviceScreen - Apagar pantalla
+### 4.1.11 closeDeviceScreen
+***Apagar pantalla***
+
 >Pone la pantalla en estado stand-by con la pantalla en negro
 
-URL de la interfaz: `127.0.0.1:30080/api/device/{{Id}}`
-Content-Type: `application/json`
-Método de solicitud: `POST`
+**Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+**Content-Type:** `application/json`
 
-Parámetros del encabezado de la solicitud:
+**Headers:**
 
-| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio | Descripción |
-| --------- | ------------------- | ------ | ----------- | ----------- |
-| sdkKey    | a7fa6795aaa891e2    | String | Sí          | Sin descripción |
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
 
-**Ejemplo del cuerpo de la solicitud:**
+**Request body — ejemplo:**
 
 ```json
 {
@@ -933,7 +877,7 @@ Parámetros del encabezado de la solicitud:
 }
 ```
 
-**Ejemplo de respuesta:**
+**Respuesta — ejemplo:**
 
 ```json
 {
@@ -949,26 +893,26 @@ Parámetros del encabezado de la solicitud:
 }
 ```
 
-### 5.1.12 /api/device/list/ - Obtener lista de dispositivos en línea
+## 4.2 Lista de dispositivos en línea (/api/device/list/)
+
 >Devuelve una lista de los dispositivos conectados en caso de operar un server. En caso de estar operando directamente con un dispositivo la lista tendrá sólo el dispositivo local.
 
-URL de la interfaz: `127.0.0.1:30080/api/device/list/`
-Content-Type: `application/json`
-Método de solicitud: `GET`
+**Endpoint:** `GET 127.0.0.1:30080/api/device/list/`
+**Content-Type:** `application/json`
 
-Parámetros del encabezado de la solicitud:
+**Headers:**
 
-| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio | Descripción |
-| --------- | ------------------- | ------ | ----------- | ----------- |
-| sdkKey    | a7fa6795aaa891e2    | String | Sí          | Sin descripción |
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
 
-**Ejemplo del cuerpo de la solicitud:**
+**Request body — ejemplo:**
 
 ```
 Ninguno
 ```
 
-**Ejemplo de respuesta:**
+**Respuesta — ejemplo:**
 
 ```
 {
@@ -983,13 +927,12 @@ Ninguno
 ---
 
 
-# 6. /api/program/ - Interfaz de programa
+# 5. Interfaz de programa /api/program/
 
 La interfaz de programas se utiliza principalmente para operar contenido relacionado con programas.
 
-`"method"` es el el nombre del método, y `"data"` contiene una lista ordenada de programas:
 
-## 6.1 Estructura de los programas
+## 5.1 Estructura de los programas (JSON)
 
 Los datos del programa se representan en formato JSON. 
 
@@ -1008,7 +951,7 @@ Los programas se reproducirán en bucle. La duración de cada programa se calcul
 
 >Tanto los programas como las áreas pueden tener un borde. Consulte el anexo acerca de los bordes disponibles.
 
-## 6.2 Métodos
+## 5.2 Métodos de programa
 
 Los métodos disponibles son:
 
@@ -1022,17 +965,24 @@ Los métodos disponibles son:
 
 
 
+---
+### 5.2.1 Método `append`
 
-### 6.2.1 Método `append`
+- **Comportamiento:** Agrega nuevo(s) programa(s) al dispositivo **sin tocar los programas existentes**.
+- **Manejo de UUID:** Si proporcionas un UUID, el dispositivo lo usará. Si lo omites, el dispositivo genera uno automáticamente.
 
-**Comportamiento:** Agrega nuevo(s) programa(s) al dispositivo **sin tocar los programas existentes**.
+**Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+**Content-Type:** `application/json`
 
-**Manejo de UUID:** Si proporcionas un UUID, el dispositivo lo usará. Si lo omites, el dispositivo genera uno automáticamente.
+**Headers:**
 
-**Patrón de solicitud:**
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
+
+**Request body — ejemplo:**
 ```json
 {
-	"id": "C16-D23-A0001,C16-D23-A0001",
     "method": "append",
     "data": [
 	    {
@@ -1055,20 +1005,40 @@ Los métodos disponibles son:
 }
 ```
 
-
-
-
-
-### 6.2.2 Método `update`
-
-**Comportamiento:** Modifica un **programa existente** identificado por su UUID. El programa ya debe existir en el dispositivo.
-
-**Manejo de UUID:** El UUID es **obligatorio** y debe coincidir con un programa existente.
-
-**Patrón de solicitud:**
+**Respuesta — ejemplo:**
 ```json
 {
-	"id": "C16-D23-A0001,C16-D23-A0001",
+    "method": "append",
+    "message": "ok",
+    "data": [
+        {
+            "id": "C16L-D24-007C6",
+            "message": "ok",
+            "data": "kSuccess"
+        }
+    ]
+}
+```
+
+---
+### 5.2.2 Método `update`
+
+- **Comportamiento:** Modifica un **programa existente** identificado por su UUID. El programa ya debe existir en el dispositivo.
+- **Manejo de UUID:** El UUID es **obligatorio** y debe coincidir con un programa existente.
+
+
+**Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+**Content-Type:** `application/json`
+
+**Headers:**
+
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
+
+**Request body — ejemplo:**
+```json
+{
     "method": "update",
     "data": [
 	    {
@@ -1083,30 +1053,75 @@ Los métodos disponibles son:
 }
 ```
 
-
-### 6.2.3 Método `replace`
-
-**Comportamiento:** **Reemplaza completamente todos los programas existentes** en el dispositivo con los programas proporcionados en la solicitud. Cualquier programa no incluido en la solicitud será eliminado.
-
-**Manejo de UUID:** Proporcionas los UUID para el nuevo conjunto de programas, si se omite el dispositivo genera uno automáticamente. El dispositivo eliminará todos los programas existentes.
-
-**Patrón de solicitud:**
+**Respuesta — ejemplo:**
 ```json
 {
-	"id": "C16-D23-A0001,C16-D23-A0001",
+    "method": "update",
+    "message": "ok",
+    "data": [
+        {
+            "id": "C16L-D24-007C6",
+            "message": "ok",
+            "data": "kSuccess"
+        }
+    ]
+}
+```
+
+---
+### 5.2.3 Método `replace`
+
+- **Comportamiento:** **Reemplaza completamente todos los programas existentes** en el dispositivo con los programas proporcionados en la solicitud. Cualquier programa no incluido en la solicitud será eliminado.
+- **Manejo de UUID:** Proporcionas los UUID para el nuevo conjunto de programas, si se omite el dispositivo genera uno automáticamente. El dispositivo eliminará todos los programas existentes.
+
+**Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+**Content-Type:** `application/json`
+
+**Headers:**
+
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
+
+**Request body — ejemplo:**
+```json
+{
     "method": "replace",
     "data": [ { /* el conjunto completo de nuevos programas */ } ]
 }
 ```
 
+**Respuesta — ejemplo:**
+```json
+{
+    "method": "replace",
+    "message": "ok",
+    "data": [
+        {
+            "id": "C16L-D24-007C6",
+            "message": "ok",
+            "data": "kSuccess"
+        }
+    ]
+}
+```
 
-### 6.2.4 Método `remove` 
+---
+### 5.2.4 Método `remove` 
 
-**Comportamiento:** Elimina uno o más programas específicos del dispositivo.
+- **Comportamiento:** Elimina uno o más programas específicos del dispositivo.
+- **Manejo de UUID:** El UUID es **obligatorio** para cada programa que se quiera eliminar. Debe coincidir con un programa existente.
 
-**Manejo de UUID:** El UUID es **obligatorio** para cada programa que se quiera eliminar. Debe coincidir con un programa existente.
+**Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+**Content-Type:** `application/json`
 
-**Patrón de solicitud:**
+**Headers:**
+
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
+
+**Request body — ejemplo:**
 ```json
 {
     "method": "remove",
@@ -1123,25 +1138,47 @@ Los métodos disponibles son:
 }
 ```
 
+**Respuesta — ejemplo:**
+```json
+{
+    "method": "remove",
+    "message": "ok",
+    "data": [
+        {
+            "id": "C16L-D24-007C6",
+            "message": "ok",
+            "data": "kSuccess"
+        }
+    ]
+}
+```
 
-### 6.2.5 Método `getAll` 
+---
+### 5.2.5 Método `getAll` 
 
 > ⚠️ **IMPORTANTE:** `getAll` es el **único** método que requiere especificar el ID del dispositivo obligatoriamente. Los demás métodos funcionan sin ID en conexión directa.
 
-**Comportamiento:** Devuelve una lista de todos los programas almacenados en el dispositivo. Solo incluye el **UUID** y el **nombre** de cada programa, no el contenido.
+- **Comportamiento:** Devuelve una lista de todos los programas almacenados en el dispositivo. Solo incluye el **UUID** y el **nombre** de cada programa, no el contenido.
+- **Manejo de UUID:** No aplica — este método no requiere enviar UUID. Solo devuelve los que ya existen.
 
-**Manejo de UUID:** No aplica — este método no requiere enviar UUID. Solo devuelve los que ya existen.
+**Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+**Content-Type:** `application/json`
 
-**Patrón de solicitud:**
+**Headers:**
+
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
+
+**Request body — ejemplo:**
 ```json
 {
-	"id": "C16L-D24-007C6",
     "method": "getAll",
     "data": []
 }
 ```
 
-**Ejemplo de respuesta:**
+**Respuesta — ejemplo:**
 ```json
 {
     "method": "getAll",
@@ -1167,8 +1204,8 @@ Los métodos disponibles son:
 }
 ```
 
-
-## 6.3 Control de reproducción de programa
+---
+## 5.3 Control de reproducción de programa
 
 Los programas pueden configurarse para tener una duración determinada, o acivar/desactivar su reproducción durante ciertas horas del día o en ciertas fechas determinadas, por ejemplo durante festividades, fines de semana, etc.
 
@@ -1226,9 +1263,9 @@ Todos los atributos se combinan con **AND lógico**. Se activa la reproducción 
 }
 ```
 
----
 
-## 6.4 Ítem de texto
+---
+## 5.4 Ítem de texto
 >Para crear textos. Admite distintas tipografías y efectos.
 
 | Parámetro   | Valor de ejemplo | Tipo                                                           | Obligatorio | Descripción |
@@ -1257,17 +1294,16 @@ Todos los atributos se combinan con **AND lógico**. Se activa la reproducción 
 > NOTA: para agregar efectos consulte el apéndice "Efectos".
 
 
-### 6.4.1 Ejemplo de programa de texto:
-URL de la interfaz: `127.0.0.1:30080/api/program/{{Id}}`
-Content-Type: `application/json`
-Método de solicitud: `POST`
+### 5.4.1 Ejemplo de programa de texto:
 
-Parámetros del encabezado de la solicitud:
+**Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+**Content-Type:** `application/json`
 
-| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio | Descripción |
-| --------- | ------------------- | ------ | ----------- | ----------- |
-| sdkKey    | a7fa6795aaa891e2    | String | Sí          | Sin descripción |
+**Headers:**
 
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
 
 **Cuerpo de la solicitud:**
 
@@ -1310,7 +1346,7 @@ Parámetros del encabezado de la solicitud:
 }
 ```
 
-**Ejemplo de respuesta:**
+**Respuesta — ejemplo:**
 ```json
 {
     "method": "replace",
@@ -1325,7 +1361,9 @@ Parámetros del encabezado de la solicitud:
 }
 ```
 
-## 6.5 Ítem de imagen
+
+---
+## 5.5 Ítem de imagen
 > Para mostrar imágenes que ya estén subidas en el dispositivo, o bien descargarlas desde una URL.
 
 | Parámetro | Valor de ejemplo | Tipo                                                                                                                                                                       | Obligatorio | Descripción |
@@ -1340,23 +1378,20 @@ Parámetros del encabezado de la solicitud:
 
 > NOTA: para agregar efectos consulte el apéndice "Efectos".
 
-### 6.5.1 Ejemplo de programa de imagen:
+### 5.5.1 Ejemplo de programa de imagen:
 
 >El ejemplo requiere subir previamente tres archivos img1.jpg, img2.jpg y img3.jpg al dispositivo con la herramienta RemoteServer.exe
 
+**Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+**Content-Type:** `application/json`
 
-URL de la interfaz: `127.0.0.1:30080/api/program/{{Id}}`
-Content-Type: `application/json`
-Método de solicitud: `POST`
+**Headers:**
 
-Parámetros del encabezado de la solicitud:
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
 
-| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio | Descripción |
-| --------- | ------------------- | ------ | ----------- | ----------- |
-| sdkKey    | a7fa6795aaa891e2    | String | Sí          | Sin descripción |
-
-
-**Ejemplo del cuerpo:**
+**Request body — ejemplo:**
 ```json
 {
     "method": "replace",
@@ -1410,7 +1445,7 @@ Parámetros del encabezado de la solicitud:
 }
 ```
 
-**Ejemplo de respuesta:**
+**Respuesta — ejemplo:**
 ```json
 {
     "method": "replace",
@@ -1425,7 +1460,8 @@ Parámetros del encabezado de la solicitud:
 }
 ```
 
-## 6.6 Ítem de video
+---
+## 5.6 Ítem de video
 
 | Parámetro | Valor de ejemplo | Tipo                                                                                                                                                                       | Obligatorio | Descripción |
 | --------- | ---------------- | ---------- | ----------- | ----------- |
@@ -1436,21 +1472,20 @@ Parámetros del encabezado de la solicitud:
 | fileSize  |                  | Int (Bytes)| No          | Tamaño del archivo; si ya existe en el dispositivo, se omite la descarga |
 
 
-### 6.6.1 Ejemplo de programa de vídeo:
+### 5.6.1 Ejemplo de programa de vídeo:
 
 >El ejemplo requiere subir previamente un archivo video.mp4 al dispositivo con la herramienta RemoteServer.exe
 
-URL de la interfaz: `127.0.0.1:30080/api/program/{{Id}}`
-Content-Type: `application/json`
-Método de solicitud: `POST`
+**Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+**Content-Type:** `application/json`
 
-Parámetros del encabezado de la solicitud:
+**Headers:**
 
-| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio | Descripción |
-| --------- | ------------------- | ------ | ----------- | ----------- |
-| sdkKey    | a7fa6795aaa891e2    | String | Sí          | Sin descripción |
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
 
-**Ejemplo del cuerpo de la solicitud:**
+**Request body — ejemplo:**
 ```json
 {
     "method": "replace",
@@ -1479,7 +1514,7 @@ Parámetros del encabezado de la solicitud:
 }
 ```
 
-**Ejemplo de respuesta:**
+**Respuesta — ejemplo:**
 ```json
 {
     "method": "replace",
@@ -1494,7 +1529,8 @@ Parámetros del encabezado de la solicitud:
 }
 ```
 
-## 6.7 Ítem de reloj digital
+---
+## 5.7 Ítem de reloj digital
 > Muestra en forma de **texto** los campos:
 > - Título
 > - Día de la semana
@@ -1535,19 +1571,18 @@ Parámetros del encabezado de la solicitud:
 | font.color     | Color `"#RRGGBB"` | No          | Color de fuente.<br>Si se determina por ej. con `week.color` entonces `font.color` se ignora |
 
 
-### 6.7.1 Ejemplo de programa de reloj digital:
+### 5.7.1 Ejemplo de programa de reloj digital:
 
-URL de la interfaz: `127.0.0.1:30080/api/program/{{Id}}`
-Content-Type: `application/json`
-Método de solicitud: `POST`
+**Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+**Content-Type:** `application/json`
 
-Parámetros del encabezado de la solicitud:
+**Headers:**
 
-| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio | Descripción |
-| --------- | ------------------- | ------ | ----------- | ----------- |
-| sdkKey    | a7fa6795aaa891e2    | String | Sí          | Sin descripción |
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
 
-**Ejemplo del cuerpo de la solicitud:**
+**Request body — ejemplo:**
 ```json
 {
 	"method": "replace",
@@ -1595,7 +1630,7 @@ Parámetros del encabezado de la solicitud:
 }
 ```
 
-**Ejemplo de respuesta:**
+**Respuesta — ejemplo:**
 ```json
 {
     "method": "replace",
@@ -1610,20 +1645,19 @@ Parámetros del encabezado de la solicitud:
 }
 ```
 
+---
+## 5.8 Programa de reloj analógico
 
-## 6.8 Programa de reloj analógico
+**Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+**Content-Type:** `application/json`
 
-URL de la interfaz: `127.0.0.1:30080/api/program/{{Id}}`
-Content-Type: `application/json`
-Método de solicitud: `POST`
+**Headers:**
 
-Parámetros del encabezado de la solicitud:
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
 
-| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio | Descripción |
-| --------- | ------------------- | ------ | ----------- | ----------- |
-| sdkKey    | a7fa6795aaa891e2    | String | Sí          | Sin descripción |
-
-Parámetros del cuerpo de la solicitud:
+**Parámetros del cuerpo de la solicitud:**
 
 | Parámetro              | Valor de ejemplo                                                | Tipo                                                                                                                             | Obligatorio | Descripción |
 | ---------------------- | --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ----------- | ----------- |
@@ -1655,19 +1689,18 @@ Parámetros del cuerpo de la solicitud:
 | font.color     | Color `"#RRGGBB"` | No          | Color de fuente.<br>Si se determina por ej. con `week.color` entonces `font.color` se ignora |
 
 
-### 6.8.1 Ejemplo de programa de reloj analógico:
+### 5.8.1 Ejemplo de programa de reloj analógico:
 
-URL de la interfaz: `127.0.0.1:30080/api/program/{{Id}}`
-Content-Type: `application/json`
-Método de solicitud: `POST`
+**Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+**Content-Type:** `application/json`
 
-Parámetros del encabezado de la solicitud:
+**Headers:**
 
-| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio | Descripción |
-| --------- | ------------------- | ------ | ----------- | ----------- |
-| sdkKey    | a7fa6795aaa891e2    | String | Sí          | Sin descripción |
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
 
-**Ejemplo del cuerpo de la solicitud:**
+**Request body — ejemplo:**
 ```json
 {
 	"method": "replace",
@@ -1717,7 +1750,7 @@ Parámetros del encabezado de la solicitud:
 }
 ```
 
-Ejemplo de respuesta:
+Respuesta — ejemplo:
 
 ```json
 {
@@ -1733,7 +1766,8 @@ Ejemplo de respuesta:
 }
 ```
 
-## 6.9 Ítem de área dinámica
+---
+## 5.9 Ítem de área dinámica
 > Consiste en un área de texto con la posibilidad de usar variables y actualizar estas variables con`pushStatus` o `setPeriodicTask`.
 
 | Parámetro   | Valor de ejemplo | Tipo                                                           | Obligatorio | Descripción |
@@ -1759,19 +1793,18 @@ Ejemplo de respuesta:
 | font.italic    | Bool          | No          | Cursiva |
 | font.underline | Bool          | No          | Subrayado |
 
-### 6.9.1 Ejemplo de programa de área dinámica:
+### 5.9.1 Ejemplo de programa de área dinámica:
 
-URL de la interfaz: `127.0.0.1:30080/api/program/{{Id}}`
-Content-Type: `application/json`
-Método de solicitud: `POST`
+**Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+**Content-Type:** `application/json`
 
-Parámetros del encabezado de la solicitud:
+**Headers:**
 
-| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio | Descripción |
-| --------- | ------------------- | ------ | ----------- | ----------- |
-| sdkKey    | a7fa6795aaa891e2    | String | Sí          | Sin descripción |
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
 
-Ejemplo del cuerpo de la solicitud:
+**Request body — ejemplo:**
 ```json
 {
     "data": [
@@ -1841,7 +1874,7 @@ Ejemplo del cuerpo de la solicitud:
 }
 ```
 
-**Ejemplo de respuesta:**
+**Respuesta — ejemplo:**
 ```json
 {
     "method": "replace",
@@ -1858,18 +1891,17 @@ Ejemplo del cuerpo de la solicitud:
 
 ---
 
-# 7. /api/file/ - Interfaz de archivo
+# 6. Interfaz de archivo /api/file/
 >Para subir archivos al dispositivo.
 
-URL de la interfaz: `127.0.0.1:30080/api/file/{{Id}}`
-Content-Type: `application/json`
-Método de solicitud: `POST`
+**Endpoint:** `POST 127.0.0.1:30080/api/file/{{deviceid}}`
+**Content-Type:** `multipart/form-data`
 
-Parámetros del encabezado de la solicitud: 
+**Headers:**
 
-| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio | Descripción |
-| --------- | ------------------- | ------ | ----------- | ----------- |
-| sdkKey    | a7fa6795aaa891e2    | String | Sí          | Sin descripción |
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
 
 **Cuerpo de solicitud:**
 ```
@@ -1878,7 +1910,7 @@ Parámetros del encabezado de la solicitud:
 Ejemplo en Postman:
 ![](images/Pasted%20image%2020260521134813.png)
 
-**Ejemplo de respuesta:**
+**Respuesta — ejemplo:**
 ```json
 {
     "data": [
@@ -1895,7 +1927,7 @@ Ejemplo en Postman:
 ```
 
 
-## 7.1 Cómo usar archivos subidos con la API
+## 6.1 Cómo usar archivos subidos con la API
 >NOTA: estas recomendaciones irán cambiando conforme el desarrollador de la API nos ofrezca más información. Un método alternativo a la API es usar la herramienta RemoteServer.exe
 
 En la respuesta, el elemento `"data"` es una URL que usaremos para el programa de imagen.
@@ -1906,7 +1938,7 @@ Luego en el programa usamos esta URL para `"file"`, o bien tal cual o bien susti
 
 ![](images/Pasted%20image%2020260521164344.png)
 
-## 7.2 Alternativa: subir archivos con RemoteServer.exe
+## 6.2 Alternativa: subir archivos con RemoteServer.exe
 Se incluye una utilidad llamada RemoteServer.exe con la que podemos subir archivos previamente a la memoria interna del dispositivo.
 
 ![](images/Pasted%20image%2020260521170011.png)
@@ -1921,22 +1953,20 @@ Luego en el programa de imagen ponemos el nombre del archivo, sin necesidad de e
 
 ---
 
-# 8. /api/screenshot/ - Interfaz de captura de pantalla
+# 7. Interfaz de captura de pantalla /api/screenshot/
 
 >Permite hacer una captura de pantalla para ver lo que está mostrando el dispositivo en este momento.
 
+**Endpoint:** `GET 127.0.0.1:30080/api/screenshot/{{deviceid}}`
+**Content-Type:** `application/json`
 
-URL de la interfaz: `127.0.0.1:30080/api/screenshot/{{Id}}`
-Content-Type: `application/json`
-Método de solicitud: `GET`
+**Headers:**
 
-Parámetros del encabezado de la solicitud:
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
 
-| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio | Descripción |
-| --------- | ------------------- | ------ | ----------- | ----------- |
-| sdkKey    | a7fa6795aaa891e2    | String | Sí          | Sin descripción |
-
-Ejemplo del cuerpo de la solicitud:
+**Request body — ejemplo:**
 ```json
 {
     "method": "screenshot",
@@ -1944,15 +1974,15 @@ Ejemplo del cuerpo de la solicitud:
 }
 ```
 
-Ejemplo de respuesta:
+**Respuesta — ejemplo:**
 
 ```json
 /* Cuando se utiliza la Interfaz General del Dispositivo para capturar una pantalla, la respuesta devuelve los datos de la imagen en base64 */
 ```
 
-# 9. Apéndices
+# 8. Apéndices
 
-## 9.1 Apéndice 1: Efectos
+## 8.1 Apéndice 1: Efectos
 >Los efectos puden aplicarse a items de **texto**, **imagen** y **área dinámica**.
 
 | Parámetro | Tipo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Obligatorio | Descripción |
@@ -1976,7 +2006,7 @@ Ejemplo de respuesta:
 ```
 
 
-## 9.2 Apéndice 2: Bordes
+## 8.2 Apéndice 2: Bordes
 >Los bordes pueden aplicarse a una **área** o a un **programa entero**.
 
 | Parámetro | Tipo   | Obligatorio | Descripción                                 |
@@ -2036,7 +2066,7 @@ Ejemplo de respuesta:
 ```
 >**IMPORTANTE**: Añadir un borde en un **programa entero** hará que el espacio de programa sea menor. Tendrás que ajustar el tamaño de las áreas en función del grosor del borde.
 
-## 9.3 Apéndice 3: Lista de fuentes disponibles
+## 8.3 Apéndice 3: Lista de fuentes disponibles
 
 ```
 1. "Bitstream Vera Sans"
@@ -2072,7 +2102,7 @@ Ejemplo de respuesta:
 
 > La lista consiste en fuentes open-source y fuentes de símbolos ("Dingbats" y "Standard Symbols L"). Por el momento no es posible añadir fuentes.
 
-## 9.4 Apéndice 4: Lista de códigos de error SDK
+## 8.4 Apéndice 4: Lista de códigos de error SDK
 Lista sacada de la documentación del protocolo SDK "SDK3.0 Manual.pdf".
 >Aunque no es necesario para el uso de esta API, se incluye en la carpeta "SDK 3.0".
 
