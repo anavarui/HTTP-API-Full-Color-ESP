@@ -64,9 +64,9 @@ La comunicación se realiza mediante solicitudes HTTP al puerto 30080 del dispos
 ![](images/Esquema%201.png)
 
 
-**Acceso indirecto mediante el API gateway (linux/windows/mac) ligado a varios dispositivos**  
+**Acceso indirecto mediante el API gateway ligado a varios dispositivos**  
 ![](images/Esquema%202.png)
-(Ya disponible. Contacte con nosotros)
+(Ya disponible para linux/windows/mac. Contacte con nosotros)
 
 ## 1.3 Registrarse en la plataforma para obtener las claves sdkKey y sdkSecret
 
