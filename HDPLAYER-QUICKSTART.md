@@ -9,7 +9,7 @@ HDPlayer es el software propietario para Windows para gestionar y controlar la p
 
 Puedes descargar la **última versión de HDPlayer** y el **manual completo** [aquí](https://www.hdwell.com/Download/)
 
-![](images/Pasted%20image%2020260519124432.png)
+![](images/Pasted%20image%2020260519124432.png)  
 *Software HDPlayer*
 
 ## 2. Detectar pantalla y encontrar IP e ID de dispositivo con HDPlayer
