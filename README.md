@@ -203,7 +203,7 @@ Hay principalmente 4 interfaces:
 
 # 4. Interfaz de dispositivo /api/device/
 
-La interfaz de dispositivo se utiliza principalmente para operar propio dispositivo (ajustar brillo, apagar/encender...) como para obtener información del estado del dispositivo.
+La interfaz de dispositivo se utiliza principalmente para gestionar las propiedades del dispositivo (ajustar brillo, apagar/encender...) como para obtener información del estado del dispositivo.
 
 ## 4.1 Métodos de dispositivo
 
@@ -513,7 +513,7 @@ ___
 
 >Puedes establecer con este método un horario de encendido/apagado o de cambio de brillo por horas.
 >
->NOTA: En el caso del brillo y el volumen es posible que no produzca un cambio inmediato, pues solo entra en efecto en las horas de cambio que se han establecido. Con un cambio de horario de brillo se recomienda actualizar manualmente el brillo con `"SetDeviceProperty"`.
+>NOTA: En el caso del brillo (y del volumen) es posible que no produzca un cambio inmediato, pues solo entra en efecto en las horas de cambio que se han establecido. Al realizar un cambio de horario se recomienda actualizar manualmente el brillo con `"SetDeviceProperty"`.
 
 Hay dos métodos para cambiar los horarios:
 - `"setScheduledTask"`: Reemplaza todos los elementos existentes.
@@ -612,7 +612,7 @@ Hay dos métodos para cambiar los horarios:
 ### 4.1.6 pushStatus
 ***Push proactivo (para área dinámica)***
 
->Establece el valor de las variables que hemos usado con un programa de área dinámica (ver sección y ejemplo de un área dinámica, en los métodos de la interfaz de programa).
+>Modifica el valor de las variables de un programa de área dinámica (ver sección y ejemplo de un área dinámica, en los métodos de la interfaz de programa).
 >
 >💡 Cómo probar este ejemplo:
 > 1. En los ejemplos de Postman abre "Dynamic area" y envíalo
@@ -663,8 +663,8 @@ Hay dos métodos para cambiar los horarios:
 >
 >💡 Cómo probar este ejemplo:
 > 1. En los ejemplos de Postman subir "Dynamic area"
-> 2. Hacer un servidor web que devuelva el texto plano `"ParkingSpace,110 Temperature,25"`
-> 3. Abre el ejemplo en Postman "Set periodic task" y cambia las URLs a tu servicio web.
+> 2. Necesitas una URL que devuelva el texto plano `"ParkingSpace,110 Temperature,25"`
+> 3. Abre el ejemplo en Postman "Set periodic task" y cambia las URLs.
 
 **Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
 
