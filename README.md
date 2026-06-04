@@ -1,6 +1,13 @@
 Documentación HTTP API para FULL COLOR SDK
 ---
 
+**Cambios recientes (04/06/2026)**
+- *API gateway ya disponible para instalar en su servidor*
+- Ya no es neceario un teléfono para el registro
+- Ejemplos para Postman corregidos
+- Correcciones varias
+
+
 # Contenido
 1. [Introducción](#1-introducción)
 2. [Cómo empezar a testear la API](#2-cómo-empezar-a-testear-la-api)
@@ -37,13 +44,13 @@ Anexo 2. [Guía rápida de HDPlayer](HDPLAYER-QUICKSTART.md)
 
 ## 1.1 Resumen
 
-Este manual detalla cómo usar la API para el desarrollo de integraciones con nuestras pantallas Full Color SDK.
+Este manual detalla cómo usar la API para el desarrollo de integraciones informáticas con nuestras pantallas Full Color SDK.
 
 Las pantallas Full Color SDK tienen habilitada tanto 1. la comunicación por protocolo SDK de código abierto (no especificado en este manual) como 2. por protocolo HTTP mediante la API que se detalla aquí.
 
-Tenga en cuenta que únicamente los dispositivos con una 'D' en medio de la ID del dispositivo tienen el hardware necesario para el SDK. Por ej. C16L-D24-00622.
+Tenga en cuenta que únicamente los dispositivos con una 'D' en medio de la ID del dispositivo tienen el hardware necesario para el SDK. Por ej. C16L-Dxx-xxxxx.
 
-Este manual explica en detalle las interfaces del sistema y se incluyen ejemplos de uso implementados en Postman, con los que el personal técnico podrá entenderlas rápidamente y empezar a desarrollar.
+Este manual explica en detalle las interfaces del sistema y se incluyen ejemplos de uso para Postman, con los que el personal técnico podrá entenderlas rápidamente y empezar a desarrollar.
 
 Los lectores deben tener conocimientos básicos de:
 1. Comprensión de los protocolos HTTPS/HTTP, etc.
@@ -61,7 +68,7 @@ La comunicación se realiza mediante solicitudes HTTP al puerto 30080 del dispos
 ![](images/Esquema%201.png)
 
 
-**Acceso indirecto mediante un servidor SDK (ubuntu/windows) con varios dispositivos (NO DISPONIBLE AÚN)**
+**Acceso indirecto mediante un API gateway (linux/windows/mac) con varios dispositivos (Ya disponible. Contacte con nosotros)**
 ![](images/Esquema%202.png)
 
 ## 1.3 Registrarse en la plataforma para obtener las claves sdkKey y sdkSecret
@@ -69,11 +76,11 @@ La comunicación se realiza mediante solicitudes HTTP al puerto 30080 del dispos
 La plataforma de registro no está abierta para el público aún. Los clientes que deseen desarrollar con la API deben registrarse con nosotros para que les facilitemos la clave pública y privada, llamadas `sdkKey` y `sdkSecret` respectivamente. 
 
 Los datos para el registro son:
-- Un teléfono
+- Un correo electrónico
 - Nombre del desarrollador
 - Nombre de la empresa
 
-Esto debe hacerse idealmente antes o durante el proceso de pedido de la pantalla, y quedan inicializadas en el propio dispositivo durante la fabricación. Si ha adquirido una pantalla para SDK pero no ha sido inicializada en su momento para la comunicación por API, contáctenos para ayudarle a activar la API.
+Esto debe hacerse idealmente antes o durante el proceso de pedido de la pantalla, y quedan inicializadas en el propio dispositivo durante la fabricación. Si ha adquirido una pantalla SDK pero no ha sido inicializada en su momento para la comunicación por API, contáctenos para ayudarle a activar la API.
 
 Estas claves son necesarias para el proceso de firma de la petición HTTP.
 
@@ -123,7 +130,7 @@ Respuesta:
 ## 3.2 Formas de especificar la ID
 >En caso de una conexión directa con un dispositivo no es obligatorio especificar la ID, excepto en algunos casos (véase "Método `getAll`").
 
-Para especificar el dispositivo que queremos controlar se pueden las siguientes formas:
+Para especificar el dispositivo que queremos controlar se pueden usar las siguientes formas:
 1. No especificar ID - /api/device/ Indica que operamos en el dispositivo local
 2. En la URL forma 1 - /api/device/C16L-D24-A0001,C16L-D24-A0002
 3. En la URL forma 2 - /api/device/?id=C16L-D24-A0001,C16L-D24-A0002
@@ -152,16 +159,22 @@ Hay dos reglas de firma:
 
 
 Donde:
+
 	`sign`: La firma calculada, agregado al encabezado de la solicitud HTTP
+    
 	`HMACMD5`: Función criptográfica HMAC-MD5
+    
     `body`: Todo el contenido del cuerpo de la solicitud HTTP
+    
     `date`: Hora y fecha actual del cliente, campo del encabezado HTTP
+    
     `sdkKey`: ofrecido durante el registro, campo del encabezado HTTP
+    
     `sdkSecret`: ofrecido durante el registro (clave secreta, no se transmite)
     
 
 ### 3.3.2 Regla 2 (Usada solo para la interfaz de archivos):
-Para la interfaz de archivos se deja el cuerpo de la solicitud fuera:
+Para la interfaz de archivos:
 
 `sign = HMACMD5(sdkKey + date, sdkSecret)`
 
