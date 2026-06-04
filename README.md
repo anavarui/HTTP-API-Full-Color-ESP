@@ -28,7 +28,7 @@ Documentación HTTP API para FULL COLOR SDK
 8. [Apéndices](#8-apéndices)
     - 8.1. [Apéndice 1: Efectos](#81-apéndice-1-efectos)
     - 8.2. [Apéndice 2: Bordes](#82-apéndice-2-bordes)
-    - 8.3. [Apéndice 3: Lista de fuentes disponibles](#83-apéndice-3-lista-de-fuentes-disponibles)
+    - 8.3. [Apéndice 3: Fuentes de texto](#83-apéndice-3-fuentes-de-texto)
     - 8.4. [Apéndice 4: Lista de códigos de error SDK](#84-apéndice-4-lista-de-códigos-de-error-sdk)
 
 Anexo 1. [Guía rápida de Postman](POSTMAN-QUICKSTART.md)
@@ -2108,8 +2108,6 @@ Ejemplo en Postman:
 
 
 ## 6.1 Cómo usar archivos subidos con la API
->NOTA: estas recomendaciones irán cambiando conforme el desarrollador de la API nos ofrezca más información. Un método alternativo a la API es usar la herramienta RemoteServer.exe
-
 En la respuesta, el elemento `"data"` es una URL que usaremos para el programa de imagen.
 
 ![](images/Pasted%20image%2020260521163001.png)
@@ -2119,7 +2117,7 @@ Luego en el programa usamos esta URL para `"file"`, o bien tal cual o bien susti
 ![](images/Pasted%20image%2020260521164344.png)
 
 ## 6.2 Alternativa: subir archivos con RemoteServer.exe
-Se incluye una utilidad llamada RemoteServer.exe con la que podemos subir archivos previamente a la memoria interna del dispositivo.
+Se incluye una utilidad llamada RemoteServer.exe con la que podemos subir archivos a la memoria interna del dispositivo si conocemos la IP del dispositivo.
 
 ![](images/Pasted%20image%2020260521170011.png)
 
@@ -2247,7 +2245,7 @@ Luego en el programa de imagen ponemos el nombre del archivo, sin necesidad de e
 ```
 >⚠️ **IMPORTANTE**: Añadir un borde en un **programa entero** hará que el espacio de programa sea menor. Tendrás que ajustar el tamaño de las áreas en función del grosor del borde.
 
-## 8.3 Apéndice 3: Lista de fuentes disponibles
+## 8.3 Apéndice 3: Fuentes de texto
 
 ```
 1. "Bitstream Vera Sans"
@@ -2346,6 +2344,6 @@ Lista sacada de la documentación del protocolo SDK "SDK3.0 Manual.pdf".
 Documentación original:
 https://gitee.com/szhuidu/cn.huidu.device.sdk/blob/master/README.en.md
 
-Esta guía está basada en la documentación original de Hudiu, y la información ha sido rectificada, ampliada y mejorada. 2026
+Esta guía está basada en la documentación original de Huidu, y la información ha sido rectificada y ampliada. 2026
 
 *Ejemplos probados en HD-C16L SDK con firmware 7.11.18.0 y hardware v1.0.*
