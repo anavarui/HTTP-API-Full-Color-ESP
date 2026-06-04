@@ -306,6 +306,7 @@ La interfaz de dispositivo se utiliza principalmente para operar propio disposit
 >Algunas propiedades son de solo lectura y no se pueden cambiar. Consultar la tabla de más arriba.
 
 **Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`  
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -350,6 +351,7 @@ La interfaz de dispositivo se utiliza principalmente para operar propio disposit
 >Principalmente para saber si la pantalla está encendida o en stand-by, además de algunas propiedades como la IP, etc.
 
 **Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`  
+
 **Content-Type:** `application/json`
 
 **Headers:**
