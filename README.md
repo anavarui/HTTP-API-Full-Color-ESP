@@ -712,9 +712,7 @@ Temperature,25
 }
 ```
 
-**Explicación:** Cada variable necesita su propia entrada. El dispositivo obtiene los datos una vez pero aplica cada expresión regular individualmente, actualizando tanto `{{ParkingSpace}}` como `{{Temperature}}` en el área dinámica.
-
-El motor regex del dispositivo solo captura **el primer par clave-valor** que coincide dentro de un único patrón `rege`. Para múltiples variables desde la misma URL, **cree una entrada de tarea separada por cada variable**. El ejemplo muestra cómo.
+El motor regex del dispositivo solo captura **el primer par clave-valor** que coincide dentro de un único patrón `rege`. Para múltiples variables desde la misma URL, **cree una entrada de tarea separada por cada variable**.
 
 **Respuesta — ejemplo:**
 ```json
