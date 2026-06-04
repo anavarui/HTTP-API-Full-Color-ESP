@@ -1404,7 +1404,7 @@ Todos los atributos se combinan con **AND lógico**. Se activa la reproducción 
 
 ### 5.5.1 Ejemplo de programa de imagen (subido con RemoteServer):
 
->El ejemplo requiere subir previamente tres archivos img1.jpg, img2.jpg y img3.jpg al dispositivo con la herramienta RemoteServer.exe
+>El ejemplo requiere subir previamente tres archivos img1.jpg, img2.jpg y img3.jpg al dispositivo con la herramienta [RemoteServer.exe](#62-alternativa-subir-archivos-con-remoteserverexe)
 
 **Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
 
@@ -1485,6 +1485,83 @@ Todos los atributos se combinan con **AND lógico**. Se activa la reproducción 
 }
 ```
 
+### 5.5.1 Ejemplo de programa de imagen (con URL):
+
+**Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
+**Content-Type:** `application/json`
+
+**Headers:**
+
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
+
+**Request body — ejemplo:**
+```json
+{
+    "method": "replace",
+    "data": [
+        {
+            "name": "Program 1",
+            "type": "normal",
+            "uuid": "c2f2ae66-a2f0-4988-bcf5-51b582b9c03d",
+            "area": [
+                {
+                    "x": 0,
+                    "y": 0,
+                    "width": 128,
+                    "height": 64,
+                    "item": [
+                        {
+                            "type": "image",
+                            "file": "https://raw.githubusercontent.com/anavarui/HTTP-API-Full-Color-ESP/refs/heads/main/postman-ejemplos/online-resources/butterfly.jpg",
+                            "fileMd5": "7672ccb6f33eb99ca14f5776e492a4e8",
+                            "fileSize": 22825,
+                            "fit": "stretch",
+                            "effect": {
+                                "type": 0,
+                                "speed": 5,
+                                "hold": 5000
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+```
+
+**Respuesta — ejemplo de éxito:**
+```json
+{
+    "method": "replace",
+    "message": "ok",
+    "data": [
+        {
+            "id": "C16L-D24-007C6",
+            "message": "ok",
+            "data": "kSuccess"
+        }
+    ]
+}
+```
+**Respuesta — ejemplo de error de descarga:**
+```json
+{
+    "method": "replace",
+    "message": "ok",
+    "data": [
+        {
+            "id": "C16L-D24-00622",
+            "message": "failed",
+            "data": "kDownloadFileFailed"
+        }
+    ]
+}
+```
+
 ---
 ## 5.6 Ítem de video
 
@@ -1497,9 +1574,9 @@ Todos los atributos se combinan con **AND lógico**. Se activa la reproducción 
 | fileSize  |                  | Int (Bytes)| No          | Tamaño del archivo; si ya existe en el dispositivo, se omite la descarga |
 
 
-### 5.6.1 Ejemplo de programa de vídeo:
+### 5.6.1 Ejemplo de programa de vídeo (subido con RemoteServer):
 
->El ejemplo requiere subir previamente un archivo video.mp4 al dispositivo con la herramienta RemoteServer.exe
+>El ejemplo requiere subir previamente un archivo video.mp4 al dispositivo con la herramienta [RemoteServer.exe](#62-alternativa-subir-archivos-con-remoteserverexe)
 
 **Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
 
@@ -1550,6 +1627,78 @@ Todos los atributos se combinan con **AND lógico**. Se activa la reproducción 
             "id": "C16L-D24-007C6",
             "message": "ok",
             "data": "kSuccess"
+        }
+    ]
+}
+```
+
+### 5.6.1 Ejemplo de programa de vídeo (con URL):
+
+**Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
+**Content-Type:** `application/json`
+
+**Headers:**
+
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
+
+**Request body — ejemplo:**
+```json
+{
+    "method": "replace",
+    "data": [
+        {
+            "name": "Program 1",
+            "type": "normal",
+            "uuid": "951b9039-b5ba-4d99-80ae-b156ca9c9f77",
+            "area": [
+                {
+                    "x": 0,
+                    "y": 0,
+                    "width": 128,
+                    "height": 64,
+                    "item": [
+                        {
+                            "type": "video",
+							"file": "https://raw.githubusercontent.com/anavarui/HTTP-API-Full-Color-ESP/raw/refs/heads/main/postman-ejemplos/online-resources/tiger.mp4",
+                            "fileMd5": "db7dfa939dbed6fb3830b587737bfbf9",
+                            "fileSize": 17994548,
+                            "aspectRatio": false
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+```
+
+**Respuesta — ejemplo de éxito:**
+```json
+{
+    "method": "replace",
+    "message": "ok",
+    "data": [
+        {
+            "id": "C16L-D24-007C6",
+            "message": "ok",
+            "data": "kSuccess"
+        }
+    ]
+}
+```
+**Respuesta — ejemplo de error de descarga:**
+```json
+{
+    "method": "replace",
+    "message": "ok",
+    "data": [
+        {
+            "id": "C16L-D24-00622",
+            "message": "failed",
+            "data": "kDownloadFileFailed"
         }
     ]
 }
