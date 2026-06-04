@@ -213,6 +213,7 @@ La interfaz de dispositivo se utiliza principalmente para operar propio disposit
 >Con este método puedes leer las propiedades como el brillo, la hora interna, la versión de firmware, etc.
 
 **Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -415,6 +416,7 @@ ___
 >NOTA: con este método no es posible leer los horarios establecidos con HDPlayer.
 
 **Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -525,6 +527,7 @@ Hay dos métodos para cambiar los horarios:
 |`relay`|Franjas horarias para el relé integrado (normalmente no usado)|
 
 **Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -616,6 +619,7 @@ Hay dos métodos para cambiar los horarios:
 > 2. Abre este ejemplo "Proactive push" y envíalo
 
 **Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -663,6 +667,7 @@ Hay dos métodos para cambiar los horarios:
 > 3. Abre el ejemplo en Postman "Set periodic task" y cambia las URLs a tu servicio web.
 
 **Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -732,6 +737,7 @@ El motor regex del dispositivo solo captura **el primer par clave-valor** que 
 >Lee la tarea de actualización que hemos establecido en el apartado anterior, usado en áreas dinámicas (ver sección y ejemplo de un área dinámica, en los métodos de la interfaz de programa).
 
 **Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -784,6 +790,7 @@ El motor regex del dispositivo solo captura **el primer par clave-valor** que 
 >Reinicia el dispositivo tras unos segundos.
 
 **Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -831,6 +838,7 @@ El motor regex del dispositivo solo captura **el primer par clave-valor** que 
 >Enciende la pantalla si ésta está apagada (stand-by).
 
 **Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -870,6 +878,7 @@ El motor regex del dispositivo solo captura **el primer par clave-valor** que 
 >Pone la pantalla en estado stand-by con la pantalla en negro
 
 **Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -908,6 +917,7 @@ El motor regex del dispositivo solo captura **el primer par clave-valor** que 
 >Devuelve una lista de los dispositivos conectados en caso de operar un server. En caso de estar operando directamente con un dispositivo la lista tendrá sólo el dispositivo local.
 
 **Endpoint:** `GET 127.0.0.1:30080/api/device/list/`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -982,6 +992,7 @@ Los métodos disponibles son:
 - **Manejo de UUID:** Si proporcionas un UUID, el dispositivo lo usará. Si lo omites, el dispositivo genera uno automáticamente.
 
 **Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -1038,6 +1049,7 @@ Los métodos disponibles son:
 
 
 **Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -1085,6 +1097,7 @@ Los métodos disponibles son:
 - **Manejo de UUID:** Proporcionas los UUID para el nuevo conjunto de programas, si se omite el dispositivo genera uno automáticamente. El dispositivo eliminará todos los programas existentes.
 
 **Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -1123,6 +1136,7 @@ Los métodos disponibles son:
 - **Manejo de UUID:** El UUID es **obligatorio** para cada programa que se quiera eliminar. Debe coincidir con un programa existente.
 
 **Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -1172,6 +1186,7 @@ Los métodos disponibles son:
 - **Manejo de UUID:** No aplica — este método no requiere enviar UUID. Solo devuelve los que ya existen.
 
 **Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -1307,6 +1322,7 @@ Todos los atributos se combinan con **AND lógico**. Se activa la reproducción 
 ### 5.4.1 Ejemplo de programa de texto:
 
 **Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -1393,6 +1409,7 @@ Todos los atributos se combinan con **AND lógico**. Se activa la reproducción 
 >El ejemplo requiere subir previamente tres archivos img1.jpg, img2.jpg y img3.jpg al dispositivo con la herramienta RemoteServer.exe
 
 **Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -1487,6 +1504,7 @@ Todos los atributos se combinan con **AND lógico**. Se activa la reproducción 
 >El ejemplo requiere subir previamente un archivo video.mp4 al dispositivo con la herramienta RemoteServer.exe
 
 **Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -1584,6 +1602,7 @@ Todos los atributos se combinan con **AND lógico**. Se activa la reproducción 
 ### 5.7.1 Ejemplo de programa de reloj digital:
 
 **Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -1659,6 +1678,7 @@ Todos los atributos se combinan con **AND lógico**. Se activa la reproducción 
 ## 5.8 Ítem de reloj analógico
 
 **Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -1702,6 +1722,7 @@ Todos los atributos se combinan con **AND lógico**. Se activa la reproducción 
 ### 5.8.1 Ejemplo de programa de reloj analógico:
 
 **Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -1806,6 +1827,7 @@ Respuesta — ejemplo:
 ### 5.9.1 Ejemplo de programa de área dinámica:
 
 **Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -1905,6 +1927,7 @@ Respuesta — ejemplo:
 >Para subir archivos al dispositivo.
 
 **Endpoint:** `POST 127.0.0.1:30080/api/file/{{deviceid}}`
+
 **Content-Type:** `multipart/form-data`
 
 **Headers:**
@@ -1968,6 +1991,7 @@ Luego en el programa de imagen ponemos el nombre del archivo, sin necesidad de e
 >Permite hacer una captura de pantalla para ver lo que está mostrando el dispositivo en este momento.
 
 **Endpoint:** `GET 127.0.0.1:30080/api/screenshot/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -2074,7 +2098,7 @@ Luego en el programa de imagen ponemos el nombre del archivo, sin necesidad de e
     ]
 }
 ```
->**IMPORTANTE**: Añadir un borde en un **programa entero** hará que el espacio de programa sea menor. Tendrás que ajustar el tamaño de las áreas en función del grosor del borde.
+>⚠️ **IMPORTANTE**: Añadir un borde en un **programa entero** hará que el espacio de programa sea menor. Tendrás que ajustar el tamaño de las áreas en función del grosor del borde.
 
 ## 8.3 Apéndice 3: Lista de fuentes disponibles
 
