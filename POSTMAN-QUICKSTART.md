@@ -41,7 +41,7 @@ Ya podemos probar los ejemplos. Abrimos cualquiera, por ejemplo "Get device stat
 
 ![](images/Pasted%20image%2020260519210121.png)
 
->NOTA: Los ejemplos de programas están diseñados para una pantalla de 128 x 64 px. Hay que modificar manualmente los valores `width` y `height` que encontrarás en el cuerpo de la petición.
+>💡 NOTA: Los ejemplos de programas están diseñados para una pantalla de 128 x 64 px. Hay que modificar manualmente los valores `width` y `height` que encontrarás en el cuerpo de la petición.
 
 ---
 
