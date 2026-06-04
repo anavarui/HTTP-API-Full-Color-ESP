@@ -155,18 +155,12 @@ Hay dos reglas de firma:
 `sign = HMACMD5(body + sdkKey + date, sdkSecret)`
 
 
-Donde:
-
-	`sign`: La firma calculada, agregado al encabezado de la solicitud HTTP
-    
-	`HMACMD5`: Función criptográfica HMAC-MD5
-    
-    `body`: Todo el contenido del cuerpo de la solicitud HTTP
-    
-    `date`: Hora y fecha actual del cliente, campo del encabezado HTTP
-    
-    `sdkKey`: ofrecido durante el registro, campo del encabezado HTTP
-    
+Donde:  
+	`sign`: La firma calculada, agregado al encabezado de la solicitud HTTP  
+	`HMACMD5`: Función criptográfica HMAC-MD5  
+    `body`: Todo el contenido del cuerpo de la solicitud HTTP  
+    `date`: Hora y fecha actual del cliente, campo del encabezado HTTP  
+    `sdkKey`: ofrecido durante el registro, campo del encabezado HTTP  
     `sdkSecret`: ofrecido durante el registro (clave secreta, no se transmite)
     
 
