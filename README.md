@@ -1,9 +1,7 @@
 Documentación HTTP API para FULL COLOR SDK
 ---
 
-> 💡 NOVEDADES:
->
-> ***API gateway*** ya disponible para instalar en su servidor!
+> 💡 NOVEDADES: ***API gateway*** ya disponible para instalar en su servidor!
 
 
 # Contenido
