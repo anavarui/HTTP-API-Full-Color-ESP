@@ -1662,7 +1662,7 @@ Todos los atributos se combinan con **AND lógico**. Se activa la reproducción 
                     "item": [
                         {
                             "type": "video",
-							"file": "https://raw.githubusercontent.com/anavarui/HTTP-API-Full-Color-ESP/raw/refs/heads/main/postman-ejemplos/online-resources/tiger.mp4",
+							"file": "https://raw.githubusercontent.com/anavarui/HTTP-API-Full-Color-ESP/refs/heads/main/postman-ejemplos/online-resources/tiger.mp4",
                             "fileMd5": "db7dfa939dbed6fb3830b587737bfbf9",
                             "fileSize": 17994548,
                             "aspectRatio": false
