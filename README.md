@@ -912,7 +912,7 @@ El motor regex del dispositivo solo captura **el primer par clave-valor** que 
 
 ## 4.2 Lista de dispositivos en línea (/api/device/list/)
 
->Devuelve una lista de los dispositivos conectados en caso de operar un server. En caso de estar operando directamente con un dispositivo la lista tendrá sólo el dispositivo local.
+>Devuelve una lista de los dispositivos conectados en caso de operar un **API gateway** en un servidor. En caso de estar operando directamente con un dispositivo la lista tendrá sólo el dispositivo local.
 
 **Endpoint:** `GET 127.0.0.1:30080/api/device/list/`
 
@@ -1306,7 +1306,7 @@ Todos los atributos se combinan con **AND lógico**. Se activa la reproducción 
 
 | Parámetro | Tipo          | Obligatorio | Descripción |
 | --------- | ------------- | ----------- | ----------- |
-| font.name      | String        | No          | Nombre de la fuente (consulte tabla)|
+| font.name      | String        | No          | Nombre de la fuente (consulte el apéndice)|
 | font.size      | Int           | No          | Tamaño de fuente |
 | font.color     | Color `"#RRGGBB"` | No          | Color de fuente |
 | font.bold      | Bool          | No          | Negrita |
@@ -1402,7 +1402,7 @@ Todos los atributos se combinan con **AND lógico**. Se activa la reproducción 
 
 > NOTA: para agregar efectos consulte el apéndice "Efectos".
 
-### 5.5.1 Ejemplo de programa de imagen:
+### 5.5.1 Ejemplo de programa de imagen (subido con RemoteServer):
 
 >El ejemplo requiere subir previamente tres archivos img1.jpg, img2.jpg y img3.jpg al dispositivo con la herramienta RemoteServer.exe
 
