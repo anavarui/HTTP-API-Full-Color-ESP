@@ -64,7 +64,7 @@ La comunicación se realiza mediante solicitudes HTTP al puerto 30080 del dispos
 ![](images/Esquema%201.png)
 
 
-**Acceso indirecto mediante el API gateway (linux/windows/mac) ligado a varios dispositivos**
+**Acceso indirecto mediante el API gateway (linux/windows/mac) ligado a varios dispositivos**  
 ![](images/Esquema%202.png)
 (Ya disponible. Contacte con nosotros)
 
