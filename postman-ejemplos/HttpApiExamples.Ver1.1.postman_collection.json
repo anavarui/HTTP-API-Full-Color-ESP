@@ -1,10 +1,9 @@
 {
   "info": {
-    "_postman_id": "7037d8c8-685f-4197-a8ee-56c3e869ff25",
-    "name": "HttpApiExamples.Ver1.0",
+    "_postman_id": "ac3f16b9-3469-417f-ad5f-655caecea830",
+    "name": "HttpApiExamples.Ver1.1",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "53772518",
-    "_collection_link": "https://go.postman.co/collection/53772518-7037d8c8-685f-4197-a8ee-56c3e869ff25?source=collection_link"
+    "_exporter_id": "53772518"
   },
   "item": [
     {
@@ -115,7 +114,7 @@
                   "raw": "{\r\n    \"method\": \"getDeviceProperty\",\r\n    \"data\": []\r\n}"
                 },
                 "url": {
-                  "raw": "http://{{ip}}:30080/api/device/",
+                  "raw": "http://{{ip}}:30080/api/device/{{deviceid}}",
                   "protocol": "http",
                   "host": [
                     "{{ip}}"
@@ -124,7 +123,7 @@
                   "path": [
                     "api",
                     "device",
-                    ""
+                    "{{deviceid}}"
                   ]
                 }
               },
@@ -232,7 +231,7 @@
                   "raw": "{\r\n    \"method\": \"setDeviceProperty\",\r\n    \"data\": {\r\n        \"name\": \"BoxPlayer 2\",\r\n        \"time\": \"2026-04-11 14:21:00\",\r\n        \"luminance\": \"70\"\r\n    }\r\n}"
                 },
                 "url": {
-                  "raw": "http://{{ip}}:30080/api/device/",
+                  "raw": "http://{{ip}}:30080/api/device/{{deviceid}}",
                   "protocol": "http",
                   "host": [
                     "{{ip}}"
@@ -241,7 +240,7 @@
                   "path": [
                     "api",
                     "device",
-                    ""
+                    "{{deviceid}}"
                   ]
                 }
               },
@@ -349,7 +348,7 @@
                   "raw": "{\r\n    \"method\": \"getDeviceStatus\",\r\n    \"data\": []\r\n}"
                 },
                 "url": {
-                  "raw": "http://{{ip}}:30080/api/device/",
+                  "raw": "http://{{ip}}:30080/api/device/{{deviceid}}",
                   "protocol": "http",
                   "host": [
                     "{{ip}}"
@@ -358,7 +357,7 @@
                   "path": [
                     "api",
                     "device",
-                    ""
+                    "{{deviceid}}"
                   ]
                 }
               },
@@ -466,7 +465,7 @@
                   "raw": "{\r\n    \"id\": \"C16L-D24-007C6\",\r\n\t\"method\": \"getScheduledTask\",\r\n\t\"data\": [\r\n\t\t\"screen\",\r\n\t\t\"volume\",\r\n\t\t\"luminance\",\r\n\t\t\"relay\"\r\n\t]\r\n}"
                 },
                 "url": {
-                  "raw": "http://{{ip}}:30080/api/device/",
+                  "raw": "http://{{ip}}:30080/api/device/{{deviceid}}",
                   "protocol": "http",
                   "host": [
                     "{{ip}}"
@@ -475,7 +474,7 @@
                   "path": [
                     "api",
                     "device",
-                    ""
+                    "{{deviceid}}"
                   ]
                 }
               },
@@ -583,7 +582,7 @@
                   "raw": "{\r\n    \"method\": \"setScheduledTask\",\r\n    \"data\": {\r\n        \"screen\": [\r\n            {\r\n                \"timeRange\": \"10:10:00~16:00:00\",\r\n                \"data\": \"true\"\r\n            }\r\n        ],\r\n        \"luminance\": [\r\n            {\r\n                \"timeRange\": \"08:00:00~18:00:00\",\r\n                \"dateRange\": \"2023-10-01~2023-10-11\",\r\n                \"WeekFilter\": \"Mon,Tue,Wed\",\r\n                \"MonthFilter\": \"Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec\",\r\n                \"data\": \"80\"\r\n            },\r\n            {\r\n                \"timeRange\": \"18:00:00~08:00:00\",\r\n                \"dateRange\": \"2023-10-01~2023-10-11\",\r\n                \"WeekFilter\": \"Mon,Tue,Wed,Thu,Fri,Sat,Sun\",\r\n                \"MonthFilter\": \"Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec\",\r\n                \"data\": \"60\"\r\n            }\r\n        ]\r\n    }\r\n}"
                 },
                 "url": {
-                  "raw": "http://{{ip}}:30080/api/device/",
+                  "raw": "http://{{ip}}:30080/api/device/{{deviceid}}",
                   "protocol": "http",
                   "host": [
                     "{{ip}}"
@@ -592,7 +591,7 @@
                   "path": [
                     "api",
                     "device",
-                    ""
+                    "{{deviceid}}"
                   ]
                 }
               },
@@ -700,7 +699,7 @@
                   "raw": "{\r\n    \"method\": \"pushStatus\",\r\n    \"data\": {\r\n        \"ParkingSpace\": \"120\",\r\n        \"Temperature\": \"16\"\r\n    }\r\n}"
                 },
                 "url": {
-                  "raw": "http://{{ip}}:30080/api/device/",
+                  "raw": "http://{{ip}}:30080/api/device/{{deviceid}}",
                   "protocol": "http",
                   "host": [
                     "{{ip}}"
@@ -709,7 +708,7 @@
                   "path": [
                     "api",
                     "device",
-                    ""
+                    "{{deviceid}}"
                   ]
                 }
               },
@@ -817,7 +816,7 @@
                   "raw": "{\r\n    \"method\": \"setPeriodicTask\",\r\n    \"data\": [\r\n        {\r\n            \"url\": \"http://192.168.90.245/1.html\",\r\n            \"rege\": \"(ParkingSpace),([0-9]+)\",\r\n            \"interval\": \"10\"\r\n        },\r\n        {\r\n            \"url\": \"http://192.168.90.245/1.html\",\r\n            \"rege\": \"(Temperature),([0-9]+)\",\r\n            \"interval\": \"10\"\r\n        }\r\n    ]\r\n}"
                 },
                 "url": {
-                  "raw": "http://{{ip}}:30080/api/device/",
+                  "raw": "http://{{ip}}:30080/api/device/{{deviceid}}",
                   "protocol": "http",
                   "host": [
                     "{{ip}}"
@@ -826,7 +825,7 @@
                   "path": [
                     "api",
                     "device",
-                    ""
+                    "{{deviceid}}"
                   ]
                 }
               },
@@ -934,7 +933,7 @@
                   "raw": "{\r\n\t\"method\": \"setPeriodicTask\",\r\n\t\"data\": [\r\n\t\t{\r\n\t\t\t\"url\": \"\",\r\n\t\t\t\"rege\": \"\",\r\n\t\t\t\"interval\": \"0\"\r\n\t\t}\r\n\t]\r\n}"
                 },
                 "url": {
-                  "raw": "http://{{ip}}:30080/api/device/",
+                  "raw": "http://{{ip}}:30080/api/device/{{deviceid}}",
                   "protocol": "http",
                   "host": [
                     "{{ip}}"
@@ -943,7 +942,7 @@
                   "path": [
                     "api",
                     "device",
-                    ""
+                    "{{deviceid}}"
                   ]
                 }
               },
@@ -1051,7 +1050,7 @@
                   "raw": "{\r\n    \"method\": \"getPeriodicTask\",\r\n    \"data\": []\r\n}"
                 },
                 "url": {
-                  "raw": "http://{{ip}}:30080/api/device/",
+                  "raw": "http://{{ip}}:30080/api/device/{{deviceid}}",
                   "protocol": "http",
                   "host": [
                     "{{ip}}"
@@ -1060,7 +1059,7 @@
                   "path": [
                     "api",
                     "device",
-                    ""
+                    "{{deviceid}}"
                   ]
                 }
               },
@@ -1168,7 +1167,7 @@
                   "raw": "{\r\n    \"method\": \"rebootDevice\",\r\n    \"data\": {\r\n        \"delay\": 5\r\n    }\r\n}"
                 },
                 "url": {
-                  "raw": "http://{{ip}}:30080/api/device/",
+                  "raw": "http://{{ip}}:30080/api/device/{{deviceid}}",
                   "protocol": "http",
                   "host": [
                     "{{ip}}"
@@ -1177,7 +1176,7 @@
                   "path": [
                     "api",
                     "device",
-                    ""
+                    "{{deviceid}}"
                   ]
                 }
               },
@@ -1285,7 +1284,7 @@
                   "raw": "{\r\n    \"method\": \"closeDeviceScreen\",\r\n    \"data\": {}\r\n}"
                 },
                 "url": {
-                  "raw": "http://{{ip}}:30080/api/device/",
+                  "raw": "http://{{ip}}:30080/api/device/{{deviceid}}",
                   "protocol": "http",
                   "host": [
                     "{{ip}}"
@@ -1294,7 +1293,7 @@
                   "path": [
                     "api",
                     "device",
-                    ""
+                    "{{deviceid}}"
                   ]
                 }
               },
@@ -1402,7 +1401,7 @@
                   "raw": "{\r\n    \"method\": \"openDeviceScreen\",\r\n    \"data\": {}\r\n}"
                 },
                 "url": {
-                  "raw": "http://{{ip}}:30080/api/device/",
+                  "raw": "http://{{ip}}:30080/api/device/{{deviceid}}",
                   "protocol": "http",
                   "host": [
                     "{{ip}}"
@@ -1411,7 +1410,7 @@
                   "path": [
                     "api",
                     "device",
-                    ""
+                    "{{deviceid}}"
                   ]
                 }
               },
@@ -1774,7 +1773,7 @@
                   "raw": "{\r\n    \"method\": \"remove\",\r\n    \"data\": [\r\n        {\r\n            \"name\": \"Program 2\",\r\n            \"uuid\": \"868fa5c8-43eb-41a2-912b-6506bec7b31c\"\r\n        },\r\n        {\r\n            \"name\": \"Program 11\",\r\n            \"uuid\": \"3c82fea3-79df-4d94-a7d8-078501207754\"\r\n        }\r\n    ]\r\n}"
                 },
                 "url": {
-                  "raw": "http://{{ip}}:30080/api/program/",
+                  "raw": "http://{{ip}}:30080/api/program/{{deviceid}}",
                   "protocol": "http",
                   "host": [
                     "{{ip}}"
@@ -1783,7 +1782,7 @@
                   "path": [
                     "api",
                     "program",
-                    ""
+                    "{{deviceid}}"
                   ]
                 }
               },
@@ -1891,7 +1890,7 @@
                   "raw": "{\r\n    \"method\": \"replace\",\r\n    \"data\": [\r\n        {\r\n            \"name\": \"Program 1\",\r\n            \"type\": \"normal\",\r\n            \"uuid\": \"5373b76b-e52b-421d-809a-27ea6d9556b4\",\r\n            \"area\": [\r\n                {\r\n                    \"x\": 0,\r\n                    \"y\": 0,\r\n                    \"width\": 128,\r\n                    \"height\": 64,\r\n                    \"item\": [\r\n                        {\r\n                            \"type\": \"text\",\r\n                            \"string\": \"This is a \\n text area\",\r\n                            \"multiLine\": true,\r\n                            \"valignment\": \"middle\",\r\n                            \"font\": {\r\n                                \"name\": \"Sans Serif\",\r\n                                \"size\": 16,\r\n                                \"bold\": true,\r\n                                \"color\": \"#00bfff\"\r\n                            },\r\n                            \"effect\": {\r\n                                \"type\": 0,\r\n                                \"speed\": 5,\r\n                                \"hold\": 5000\r\n                            }\r\n                        }\r\n                    ],\r\n                    \"border\": {\r\n                        \"type\": 298,\r\n                        \"speed\": 6,\r\n                        \"effect\": \"rotate\"\r\n                    }\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}"
                 },
                 "url": {
-                  "raw": "http://{{ip}}:30080/api/program/",
+                  "raw": "http://{{ip}}:30080/api/program/{{deviceid}}",
                   "protocol": "http",
                   "host": [
                     "{{ip}}"
@@ -1900,7 +1899,7 @@
                   "path": [
                     "api",
                     "program",
-                    ""
+                    "{{deviceid}}"
                   ]
                 }
               },
@@ -2008,7 +2007,7 @@
                   "raw": "{\r\n    \"method\": \"replace\",\r\n    \"data\": [\r\n        {\r\n            \"name\": \"Program 1\",\r\n            \"type\": \"normal\",\r\n            \"uuid\": \"6eec618f-c5b9-478b-8528-7f7af1a5145e\",\r\n            \"area\": [\r\n                {\r\n                    \"x\": 0,\r\n                    \"y\": 0,\r\n                    \"width\": 128,\r\n                    \"height\": 64,\r\n                    \"item\": [\r\n                        {\r\n                            \"type\": \"text\",\r\n                            \"string\": \"This is a sliding text example     \",\r\n                            \"multiLine\": false,\r\n                            \"valignment\": \"middle\",\r\n                            \"font\": {\r\n                                \"name\": \"Sans Serif\",\r\n                                \"size\": 24,\r\n                                \"bold\": true,\r\n                                \"color\": \"#ffffff\"\r\n                            },\r\n                            \"effect\": {\r\n                                \"type\": 26,\r\n                                \"speed\": 4\r\n                            }\r\n                        }\r\n                    ]\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}"
                 },
                 "url": {
-                  "raw": "http://{{ip}}:30080/api/program/",
+                  "raw": "http://{{ip}}:30080/api/program/{{deviceid}}",
                   "protocol": "http",
                   "host": [
                     "{{ip}}"
@@ -2017,7 +2016,7 @@
                   "path": [
                     "api",
                     "program",
-                    ""
+                    "{{deviceid}}"
                   ]
                 }
               },
@@ -2125,7 +2124,7 @@
                   "raw": "{\r\n    \"method\": \"replace\",\r\n    \"data\": [\r\n        {\r\n            \"name\": \"Program 1\",\r\n            \"type\": \"normal\",\r\n            \"uuid\": \"f5b2c8c9-218a-4470-ae28-0d6b3ecd6cef\",\r\n            \"area\": [\r\n                {\r\n                    \"x\": 0,\r\n                    \"y\": 0,\r\n                    \"width\": 128,\r\n                    \"height\": 64,\r\n                    \"item\": [\r\n                        {\r\n                            \"type\": \"image\",\r\n                            \"file\": \"img1.jpg\",\r\n                            \"fit\": \"stretch\",\r\n                            \"effect\": {\r\n                                \"type\": 1,\r\n                                \"speed\": 6,\r\n                                \"hold\": 5000\r\n                            }\r\n                        },\r\n                        {\r\n                            \"type\": \"image\",\r\n                            \"file\": \"img2.jpg\",\r\n                            \"fit\": \"stretch\",\r\n                            \"effect\": {\r\n                                \"type\": 1,\r\n                                \"speed\": 6,\r\n                                \"hold\": 5000\r\n                            }\r\n                        },\r\n                        {\r\n                            \"type\": \"image\",\r\n                            \"file\": \"img3.jpg\",\r\n                            \"fit\": \"stretch\",\r\n                            \"effect\": {\r\n                                \"type\": 1,\r\n                                \"speed\": 6,\r\n                                \"hold\": 5000\r\n                            }\r\n                        }\r\n                    ]\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}"
                 },
                 "url": {
-                  "raw": "http://{{ip}}:30080/api/program/",
+                  "raw": "http://{{ip}}:30080/api/program/{{deviceid}}",
                   "protocol": "http",
                   "host": [
                     "{{ip}}"
@@ -2134,14 +2133,14 @@
                   "path": [
                     "api",
                     "program",
-                    ""
+                    "{{deviceid}}"
                   ]
                 }
               },
               "response": []
             },
             {
-              "name": "Image program (from remote URL) (not working)",
+              "name": "Image program (from URL)",
               "event": [
                 {
                   "listen": "prerequest",
@@ -2239,10 +2238,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    \"method\": \"replace\",\r\n    \"data\": [\r\n        {\r\n            \"name\": \"Program 1\",\r\n            \"type\": \"normal\",\r\n            \"uuid\": \"c2f2ae66-a2f0-4988-bcf5-51b582b9c03d\",\r\n            \"area\": [\r\n                {\r\n                    \"x\": 0,\r\n                    \"y\": 0,\r\n                    \"width\": 128,\r\n                    \"height\": 64,\r\n                    \"item\": [\r\n                        {\r\n                            \"type\": \"image\",\r\n                            \"file\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Papilio_machaon_Mitterbach_01.jpg/330px-Papilio_machaon_Mitterbach_01.jpg\",\r\n                            \"fileMd5\": \"7672ccb6f33eb99ca14f5776e492a4e8\",\r\n                            \"fileSize\": 22825,\r\n                            \"fit\": \"stretch\",\r\n                            \"effect\": {\r\n                                \"type\": 0,\r\n                                \"speed\": 5,\r\n                                \"hold\": 5000\r\n                            }\r\n                        }\r\n                    ]\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}"
+                  "raw": "{\r\n    \"method\": \"replace\",\r\n    \"data\": [\r\n        {\r\n            \"name\": \"Program 1\",\r\n            \"type\": \"normal\",\r\n            \"uuid\": \"c2f2ae66-a2f0-4988-bcf5-51b582b9c03d\",\r\n            \"area\": [\r\n                {\r\n                    \"x\": 0,\r\n                    \"y\": 0,\r\n                    \"width\": 128,\r\n                    \"height\": 64,\r\n                    \"item\": [\r\n                        {\r\n                            \"type\": \"image\",\r\n                            \"file\": \"https://raw.githubusercontent.com/anavarui/HTTP-API-Full-Color-ESP/refs/heads/main/postman-ejemplos/online-resources/butterfly.jpg\",\r\n                            \"fileMd5\": \"7672ccb6f33eb99ca14f5776e492a4e8\",\r\n                            \"fileSize\": 22825,\r\n                            \"fit\": \"stretch\",\r\n                            \"effect\": {\r\n                                \"type\": 0,\r\n                                \"speed\": 5,\r\n                                \"hold\": 5000\r\n                            }\r\n                        }\r\n                    ]\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}"
                 },
                 "url": {
-                  "raw": "http://{{ip}}:30080/api/program/",
+                  "raw": "http://{{ip}}:30080/api/program/{{deviceid}}",
                   "protocol": "http",
                   "host": [
                     "{{ip}}"
@@ -2251,14 +2250,14 @@
                   "path": [
                     "api",
                     "program",
-                    ""
+                    "{{deviceid}}"
                   ]
                 }
               },
               "response": []
             },
             {
-              "name": "Video program",
+              "name": "Video program (from file)",
               "event": [
                 {
                   "listen": "prerequest",
@@ -2359,7 +2358,7 @@
                   "raw": "{\r\n    \"method\": \"replace\",\r\n    \"data\": [\r\n        {\r\n            \"name\": \"Program 1\",\r\n            \"type\": \"normal\",\r\n            \"uuid\": \"951b9039-b5ba-4d99-80ae-b156ca9c9f77\",\r\n            \"area\": [\r\n                {\r\n                    \"x\": 0,\r\n                    \"y\": 0,\r\n                    \"width\": 128,\r\n                    \"height\": 64,\r\n                    \"item\": [\r\n                        {\r\n                            \"type\": \"video\",\r\n\t\t\t\t\t\t\t\"file\": \"video.mp4\",\r\n                            \"aspectRatio\": false\r\n                        }\r\n                    ]\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}"
                 },
                 "url": {
-                  "raw": "http://{{ip}}:30080/api/program/",
+                  "raw": "http://{{ip}}:30080/api/program/{{deviceid}}",
                   "protocol": "http",
                   "host": [
                     "{{ip}}"
@@ -2368,7 +2367,124 @@
                   "path": [
                     "api",
                     "program",
-                    ""
+                    "{{deviceid}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Video program (from URL)",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "pm.request.headers.upsert({\r",
+                      "    key: \"requestId\",\r",
+                      "    value: pm.variables.get(\"requestId\")\r",
+                      "});\r",
+                      "\r",
+                      "if (pm.request.headers.has(\"sdkKey\")) {\r",
+                      "\r",
+                      "    pm.request.headers.upsert({\r",
+                      "        key: \"sdkKey\",\r",
+                      "        value: pm.environment.get(\"sdkKey\")\r",
+                      "    });\r",
+                      "\r",
+                      "    var dateData = new Date()\r",
+                      "    pm.request.headers.upsert({\r",
+                      "        key: \"date\",\r",
+                      "        value: dateData.toUTCString()\r",
+                      "    });\r",
+                      "\r",
+                      "    var signText = pm.environment.get(\"sdkKey\") + dateData.toUTCString()\r",
+                      "    if (pm.request.body != undefined && pm.request.body.raw != undefined) {\r",
+                      "        signText = pm.request.body.raw + signText\r",
+                      "    }\r",
+                      "    var sign = CryptoJS.HmacMD5(signText, pm.environment.get(\"sdkSecret\")).toString();\r",
+                      "\r",
+                      "    pm.request.headers.upsert({\r",
+                      "        key: \"sign\",\r",
+                      "        value: sign\r",
+                      "    });\r",
+                      "} else if (pm.request.url.query.has(\"sdkKey\")) {\r",
+                      "\r",
+                      "    pm.request.url.query.upsert({\r",
+                      "        key: \"sdkKey\",\r",
+                      "        value: pm.environment.get(\"sdkKey\")\r",
+                      "    });\r",
+                      "\r",
+                      "    var dateData = new Date()\r",
+                      "    pm.request.url.query.upsert({\r",
+                      "        key: \"date\",\r",
+                      "        value: dateData.toUTCString()\r",
+                      "    });\r",
+                      "\r",
+                      "    var signText = pm.environment.get(\"sdkKey\") + dateData.toUTCString()\r",
+                      "    if (pm.request.body != undefined && pm.request.body.raw != undefined) {\r",
+                      "        signText = pm.request.body.raw + signText\r",
+                      "    }\r",
+                      "    var sign = CryptoJS.HmacMD5(signText, pm.environment.get(\"sdkSecret\")).toString();\r",
+                      "\r",
+                      "    pm.request.url.query.upsert({\r",
+                      "        key: \"sign\",\r",
+                      "        value: sign\r",
+                      "    });\r",
+                      "}\r",
+                      "\r",
+                      "\r",
+                      "var headers = pm.request.headers;\r",
+                      "\r",
+                      "headers.each((item) => {\r",
+                      "    console.log(item.key + \":\" + item.value);\r",
+                      "});\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "sdkKey",
+                    "value": "a7fa6795aaa891e2",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"method\": \"replace\",\r\n    \"data\": [\r\n        {\r\n            \"name\": \"Program 1\",\r\n            \"type\": \"normal\",\r\n            \"uuid\": \"951b9039-b5ba-4d99-80ae-b156ca9c9f77\",\r\n            \"area\": [\r\n                {\r\n                    \"x\": 0,\r\n                    \"y\": 0,\r\n                    \"width\": 128,\r\n                    \"height\": 64,\r\n                    \"item\": [\r\n                        {\r\n                            \"type\": \"video\",\r\n\t\t\t\t\t\t\t\"file\": \"https://raw.githubusercontent.com/anavarui/HTTP-API-Full-Color-ESP/refs/heads/main/postman-ejemplos/online-resources/tiger.mp4\",\r\n                            \"fileMd5\": \"db7dfa939dbed6fb3830b587737bfbf9\",\r\n                            \"fileSize\": 17994548,\r\n                            \"aspectRatio\": false\r\n                        }\r\n                    ]\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}"
+                },
+                "url": {
+                  "raw": "http://{{ip}}:30080/api/program/{{deviceid}}",
+                  "protocol": "http",
+                  "host": [
+                    "{{ip}}"
+                  ],
+                  "port": "30080",
+                  "path": [
+                    "api",
+                    "program",
+                    "{{deviceid}}"
                   ]
                 }
               },
@@ -2476,7 +2592,7 @@
                   "raw": "{\r\n\t\"method\": \"replace\",\r\n\t\"data\": [\r\n        {\r\n            \"name\": \"Program 1\",\r\n            \"type\": \"normal\",\r\n            \"uuid\": \"d57af220-c138-4ab3-bb80-a6287cf635e4\",\r\n            \"area\": [\r\n                {\r\n                    \"x\": 0,\r\n                    \"y\": 0,\r\n                    \"width\": 128,\r\n                    \"height\": 64,\r\n                    \"item\": [\r\n                        {\r\n                            \"type\": \"digitalClock\",\r\n                            \"timezone\": \"+2:00\",\r\n                            \"timeOffset\": \"\",\r\n                            \"multiLine\": true,\r\n                            \"font\": {\r\n                                \"name\": \"Sans Serif\",\r\n                                \"size\": 15,\r\n                                \"color\": \"#ffff00\"\r\n                            },\r\n                            \"title\": {\r\n                                \"string\": \"Digital Clock\"\r\n                            },\r\n                            \"date\": {\r\n                                \"format\": \"2\"\r\n                            },\r\n                            \"week\": {\r\n                                \"display\": \"false\"\r\n                            },\r\n                            \"time\": {\r\n                                \"format\": \"0\",\r\n                                \"color\": \"#ffffff\"\r\n                            }\r\n                        }\r\n                    ]\r\n                }\r\n            ]\r\n\t    }\r\n    ]\r\n}"
                 },
                 "url": {
-                  "raw": "http://{{ip}}:30080/api/program/",
+                  "raw": "http://{{ip}}:30080/api/program/{{deviceid}}",
                   "protocol": "http",
                   "host": [
                     "{{ip}}"
@@ -2485,7 +2601,7 @@
                   "path": [
                     "api",
                     "program",
-                    ""
+                    "{{deviceid}}"
                   ]
                 }
               },
@@ -2593,7 +2709,7 @@
                   "raw": "{\r\n\t\"method\": \"replace\",\r\n\t\"data\": [\r\n\t\t{\r\n\t\t\t\"name\": \"Program 1\",\r\n\t\t\t\"type\": \"normal\",\r\n\t\t\t\"uuid\": \"6342eaf6-2728-4b4e-ae5d-eb0b607dbc40\",\r\n\t\t\t\"area\": [\r\n\t\t\t\t{\r\n\t\t\t\t\t\"x\": 0,\r\n\t\t\t\t\t\"y\": 0,\r\n\t\t\t\t\t\"width\": 128,\r\n\t\t\t\t\t\"height\": 64,\r\n\t\t\t\t\t\"item\": [\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"type\": \"dialClock\",\r\n\t\t\t\t\t\t\t\"timezone\": \"+2:00\",\r\n\t\t\t\t\t\t\t\"timeOffset\": \"\",\r\n\t\t\t\t\t\t\t\"font\": {\r\n\t\t\t\t\t\t\t\t\"name\": \"Sans Serif\",\r\n\t\t\t\t\t\t\t\t\"size\": 9,\r\n\t\t\t\t\t\t\t\t\"color\": \"#249763\"\r\n\t\t\t\t\t\t\t},\r\n                            \"style\": {\r\n                                \"hourHandColor\": \"#ffffff\",\r\n                                \"minuteHandColor\": \"#ffffff\",\r\n                                \"secondHandColor\": \"#cd3278\",\r\n                                \"hourScaleColor\": \"#ffffff\",\r\n                                \"minuteScaleColor\": \"#ffffff\"\r\n                            },\r\n\t\t\t\t\t\t\t\"title\": {\r\n\t\t\t\t\t\t\t\t\"string\": \"reloj\"\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t\"date\": {\r\n\t\t\t\t\t\t\t\t\"format\": \"3\"\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t\"week\": {\r\n\t\t\t\t\t\t\t\t\"format\": \"2\"\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t\"time\": {\r\n\t\t\t\t\t\t\t\t\"format\": \"1\"\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t]\r\n\t\t\t\t}\r\n\t\t\t]\r\n\t\t}\r\n\t]\r\n}"
                 },
                 "url": {
-                  "raw": "http://{{ip}}:30080/api/program/",
+                  "raw": "http://{{ip}}:30080/api/program/{{deviceid}}",
                   "protocol": "http",
                   "host": [
                     "{{ip}}"
@@ -2602,7 +2718,7 @@
                   "path": [
                     "api",
                     "program",
-                    ""
+                    "{{deviceid}}"
                   ]
                 }
               },
@@ -2712,7 +2828,7 @@
                   "raw": "{\r\n    \"data\": [\r\n        {\r\n            \"name\": \"Program 1\",\r\n            \"type\": \"normal\",\r\n            \"uuid\": \"10d5e2e9-f771-415f-85a9-3810930e385f\",\r\n            \"area\": [\r\n                {\r\n                    \"x\": 0,\r\n                    \"y\": 0,\r\n                    \"width\": 128,\r\n                    \"height\": 32,\r\n                    \"item\": [\r\n                        {\r\n                            \"type\": \"text\",\r\n                            \"string\": \"Info del parking\",\r\n                            \"alignment\": \"left\",\r\n                            \"multiLine\": false,\r\n                            \"font\": {\r\n                                \"name\": \"Sans Serif\",\r\n                                \"size\": 14,\r\n                                \"underline\": false,\r\n                                \"bold\": true,\r\n                                \"italic\": false,\r\n                                \"color\": \"#ffff00\"\r\n                            },\r\n                            \"effect\": {\r\n                                \"type\": 0,\r\n                                \"speed\": 5,\r\n                                \"hold\": 5000\r\n                            }\r\n                        }\r\n                    ]\r\n                },\r\n                {\r\n                    \"x\": 0,\r\n                    \"y\": 32,\r\n                    \"width\": 128,\r\n                    \"height\": 32,\r\n                    \"item\": [\r\n                        {\r\n                            \"type\": \"dynamic\",\r\n                            \"string\": \"Temp: {{Temperature}}°C<br>Plazas: {{ParkingSpace}}\",\r\n                            \"keys\": \"Temperature,ParkingSpace\",\r\n                            \"alignment\": \"center\",\r\n                            \"font\": {\r\n                                \"name\": \"Sans Serif\",\r\n                                \"size\": 14,\r\n                                \"underline\": false,\r\n                                \"bold\": true,\r\n                                \"italic\": false,\r\n                                \"color\": \"#ffff00\"\r\n                            },\r\n                            \"effect\": {\r\n                                \"type\": 0,\r\n                                \"speed\": 5,\r\n                                \"hold\": 5000\r\n                            }\r\n                        }\r\n                    ]\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"method\": \"replace\"\r\n}"
                 },
                 "url": {
-                  "raw": "http://{{ip}}:30080/api/program/",
+                  "raw": "http://{{ip}}:30080/api/program/{{deviceid}}",
                   "protocol": "http",
                   "host": [
                     "{{ip}}"
@@ -2721,7 +2837,7 @@
                   "path": [
                     "api",
                     "program",
-                    ""
+                    "{{deviceid}}"
                   ]
                 }
               },
@@ -2829,7 +2945,7 @@
                   "raw": "{\r\n    \"method\": \"replace\",\r\n    \"data\": [\r\n        {\r\n            \"name\": \"Program 1\",\r\n            \"type\": \"normal\",\r\n            \"uuid\": \"bd94107c-5b99-4b9d-a49d-aba6947b7c79\",\r\n            \"area\": [\r\n                {\r\n                    \"x\": 0,\r\n                    \"y\": 0,\r\n                    \"width\": 128,\r\n                    \"height\": 32,\r\n                    \"item\": [\r\n                        {\r\n                            \"type\": \"text\",\r\n                            \"string\": \"Item 1\",\r\n                            \"effect\": {\r\n                                \"type\": 3,\r\n                                \"speed\": 8,\r\n                                \"hold\": 3000\r\n                            }\r\n                        },\r\n                        {\r\n                            \"type\": \"text\",\r\n                            \"string\": \"Item 2\",\r\n                            \"effect\": {\r\n                                \"type\": 3,\r\n                                \"speed\": 8,\r\n                                \"hold\": 3000\r\n                            }\r\n                        }\r\n                    ],\r\n                    \"border\": {\r\n                        \"type\": 0,\r\n                        \"speed\": 5,\r\n                        \"effect\": \"rotate\"\r\n                    }\r\n                },\r\n                {\r\n                    \"x\": 0,\r\n                    \"y\": 32,\r\n                    \"width\": 128,\r\n                    \"height\": 32,\r\n                    \"item\": [\r\n                        {\r\n                            \"type\": \"digitalClock\",\r\n                            \"multiLine\": false,\r\n                            \"timezone\": \"+2:00\",\r\n                            \"title\": {\r\n                                \"display\": \"true\",\r\n                                \"string\": \"Area 2   \",\r\n                                \"color\": \"#00ff00\"\r\n                            },\r\n                            \"week\": {\r\n                                \"display\": \"false\"\r\n                            },\r\n                            \"date\": {\r\n                                \"display\": \"false\"\r\n                            }\r\n                        }\r\n                    ]\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"name\": \"Program 2\",\r\n            \"type\": \"normal\",\r\n            \"uuid\": \"4fd7e7dc-0818-4b6b-99a4-8b8964d310f7\",\r\n            \"area\": [\r\n                {\r\n                    \"x\": 0,\r\n                    \"y\": 0,\r\n                    \"width\": 128,\r\n                    \"height\": 64,\r\n                    \"item\": [\r\n                        {\r\n                            \"type\": \"text\",\r\n                            \"string\": \"This is Program 2\",\r\n                            \"multiLine\": true,\r\n                            \"font\": {\r\n                                \"size\": 16,\r\n                                \"bold\": true\r\n                            },\r\n                            \"effect\": {\r\n                                \"type\": 3,\r\n                                \"speed\": 8,\r\n                                \"hold\": 5000\r\n                            }\r\n                        }\r\n                    ]\r\n                }\r\n            ],\r\n            \"playControl\": {\r\n                \"duration\": \"00:00:03\"\r\n            }\r\n        }\r\n    ]\r\n}"
                 },
                 "url": {
-                  "raw": "http://{{ip}}:30080/api/program/",
+                  "raw": "http://{{ip}}:30080/api/program/{{deviceid}}",
                   "protocol": "http",
                   "host": [
                     "{{ip}}"
@@ -2838,7 +2954,7 @@
                   "path": [
                     "api",
                     "program",
-                    ""
+                    "{{deviceid}}"
                   ]
                 }
               },
@@ -2946,7 +3062,7 @@
                   "raw": "{\r\n    \"method\": \"replace\",\r\n    \"data\": [\r\n        {\r\n            \"name\": \"Program 1\",\r\n            \"type\": \"normal\",\r\n            \"uuid\": \"2f0f44c2-1f2f-4453-9f38-b37d3bd749f0\",\r\n            \"area\": [\r\n                {\r\n                    \"x\": 0,\r\n                    \"y\": 0,\r\n                    \"width\": 128,\r\n                    \"height\": 64,\r\n                    \"item\": [\r\n                        {\r\n                            \"type\": \"image\",\r\n                            \"file\": \"background.jpg\",\r\n                            \"fit\": \"stretch\",\r\n                            \"effect\": {\r\n                                \"type\": 0,\r\n                                \"speed\": 5,\r\n                                \"hold\": 5000\r\n                            }\r\n                        }\r\n                    ]\r\n                },\r\n                {\r\n                    \"x\": 0,\r\n                    \"y\": 0,\r\n                    \"width\": 128,\r\n                    \"height\": 64,\r\n                    \"item\": [\r\n                        {\r\n                            \"type\": \"text\",\r\n                            \"string\": \"Example text\\nover an image\",\r\n                            \"multiLine\": true,\r\n                            \"valignment\": \"middle\",\r\n                            \"font\": {\r\n                                \"name\": \"Sans Serif\",\r\n                                \"size\": 12,\r\n                                \"bold\": true,\r\n                                \"color\": \"#d4a900\"\r\n                            },\r\n                            \"effect\": {\r\n                                \"type\": 30,\r\n                                \"speed\": 6,\r\n                                \"hold\": 5000\r\n                            }\r\n                        }\r\n                    ]\r\n                }\r\n\r\n            ]\r\n        }\r\n    ]\r\n}"
                 },
                 "url": {
-                  "raw": "http://{{ip}}:30080/api/program/",
+                  "raw": "http://{{ip}}:30080/api/program/{{deviceid}}",
                   "protocol": "http",
                   "host": [
                     "{{ip}}"
@@ -2955,7 +3071,7 @@
                   "path": [
                     "api",
                     "program",
-                    ""
+                    "{{deviceid}}"
                   ]
                 }
               },
@@ -3094,7 +3210,7 @@
                   ]
                 },
                 "url": {
-                  "raw": "http://{{ip}}:30080/api/file/",
+                  "raw": "http://{{ip}}:30080/api/file/{{deviceid}}",
                   "protocol": "http",
                   "host": [
                     "{{ip}}"
@@ -3103,7 +3219,7 @@
                   "path": [
                     "api",
                     "file",
-                    ""
+                    "{{deviceid}}"
                   ]
                 }
               },
@@ -3232,7 +3348,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "http://{{ip}}:30080/api/screenshot/",
+                  "raw": "http://{{ip}}:30080/api/screenshot/{{deviceid}}",
                   "protocol": "http",
                   "host": [
                     "{{ip}}"
@@ -3241,7 +3357,7 @@
                   "path": [
                     "api",
                     "screenshot",
-                    ""
+                    "{{deviceid}}"
                   ]
                 }
               },
@@ -3365,7 +3481,7 @@
               "raw": "{\r\n\t\"method\": \"append\",\r\n\t\"data\": {\r\n\t\t\"key\": \"{{sdkKey}}\",\r\n\t\t\"secret\": \"{{sdkSecret}}\"\r\n\t}\r\n}"
             },
             "url": {
-              "raw": "http://{{ip}}:30080/api/sdkkey/{{deviceid}}",
+              "raw": "http://{{ip}}:30080/api/sdkkey/",
               "protocol": "http",
               "host": [
                 "{{ip}}"
@@ -3374,7 +3490,7 @@
               "path": [
                 "api",
                 "sdkkey",
-                "{{deviceid}}"
+                ""
               ]
             }
           },

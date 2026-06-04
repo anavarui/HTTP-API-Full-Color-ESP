@@ -27,7 +27,7 @@ Una vez importada la colección, ahora vamos a `Create Enviroment` y pon un nomb
 
 Creamos las siguientes variables:
 
-`ip` - la IP del  (puedes verla con HDPlayer)
+`ip` - la IP del dispositivo (puedes verla con HDPlayer)
 
 `deviceid` - la ID del dispositivo (puedes verla con HDPlayer)
 
@@ -41,7 +41,7 @@ Ya podemos probar los ejemplos. Abrimos cualquiera, por ejemplo "Get device stat
 
 ![](images/Pasted%20image%2020260519210121.png)
 
->NOTA: Los ejemplos de programas están diseñados para una pantalla de 128 x 64 px. Hay que modificar manualmente los valores `width` y `height` que encontrarás en el cuerpo de la petición.
+>💡 NOTA: Los ejemplos de programas están diseñados para una pantalla de 128 x 64 px. Hay que modificar manualmente los valores `width` y `height` que encontrarás en los ejemplos.
 
 ---
 

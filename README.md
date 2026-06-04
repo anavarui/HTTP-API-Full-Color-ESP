@@ -1,6 +1,9 @@
 Documentación HTTP API para FULL COLOR SDK
 ---
 
+> 💡 NOVEDAD: ***API gateway*** ya disponible para instalar en su servidor!
+
+
 # Contenido
 1. [Introducción](#1-introducción)
 2. [Cómo empezar a testear la API](#2-cómo-empezar-a-testear-la-api)
@@ -25,7 +28,7 @@ Documentación HTTP API para FULL COLOR SDK
 8. [Apéndices](#8-apéndices)
     - 8.1. [Apéndice 1: Efectos](#81-apéndice-1-efectos)
     - 8.2. [Apéndice 2: Bordes](#82-apéndice-2-bordes)
-    - 8.3. [Apéndice 3: Lista de fuentes disponibles](#83-apéndice-3-lista-de-fuentes-disponibles)
+    - 8.3. [Apéndice 3: Fuentes de texto](#83-apéndice-3-fuentes-de-texto)
     - 8.4. [Apéndice 4: Lista de códigos de error SDK](#84-apéndice-4-lista-de-códigos-de-error-sdk)
 
 Anexo 1. [Guía rápida de Postman](POSTMAN-QUICKSTART.md)
@@ -37,13 +40,13 @@ Anexo 2. [Guía rápida de HDPlayer](HDPLAYER-QUICKSTART.md)
 
 ## 1.1 Resumen
 
-Este manual detalla cómo usar la API para el desarrollo de integraciones con nuestras pantallas Full Color SDK.
+Este manual detalla cómo usar la API para el desarrollo de integraciones informáticas con nuestras pantallas Full Color SDK.
 
 Las pantallas Full Color SDK tienen habilitada tanto 1. la comunicación por protocolo SDK de código abierto (no especificado en este manual) como 2. por protocolo HTTP mediante la API que se detalla aquí.
 
-Tenga en cuenta que únicamente los dispositivos con una 'D' en medio de la ID del dispositivo tienen el hardware necesario para el SDK. Por ej. C16L-D24-00622.
+Tenga en cuenta que únicamente los dispositivos con una 'D' en medio de la ID del dispositivo tienen el hardware necesario para el SDK. Por ej. C16L-Dxx-xxxxx.
 
-Este manual explica en detalle las interfaces del sistema y se incluyen ejemplos de uso implementados en Postman, con los que el personal técnico podrá entenderlas rápidamente y empezar a desarrollar.
+Este manual explica en detalle las interfaces del sistema y se incluyen ejemplos de uso para Postman, con los que el personal técnico podrá entenderlas rápidamente y empezar a desarrollar.
 
 Los lectores deben tener conocimientos básicos de:
 1. Comprensión de los protocolos HTTPS/HTTP, etc.
@@ -61,19 +64,20 @@ La comunicación se realiza mediante solicitudes HTTP al puerto 30080 del dispos
 ![](images/Esquema%201.png)
 
 
-**Acceso indirecto mediante un servidor SDK (ubuntu/windows) con varios dispositivos (NO DISPONIBLE AÚN)**
+**Acceso indirecto mediante el API gateway (linux/windows/mac) ligado a varios dispositivos**  
 ![](images/Esquema%202.png)
+(Ya disponible. Contacte con nosotros)
 
 ## 1.3 Registrarse en la plataforma para obtener las claves sdkKey y sdkSecret
 
 La plataforma de registro no está abierta para el público aún. Los clientes que deseen desarrollar con la API deben registrarse con nosotros para que les facilitemos la clave pública y privada, llamadas `sdkKey` y `sdkSecret` respectivamente. 
 
 Los datos para el registro son:
-- Un teléfono
+- Un correo electrónico
 - Nombre del desarrollador
 - Nombre de la empresa
 
-Esto debe hacerse idealmente antes o durante el proceso de pedido de la pantalla, y quedan inicializadas en el propio dispositivo durante la fabricación. Si ha adquirido una pantalla para SDK pero no ha sido inicializada en su momento para la comunicación por API, contáctenos para ayudarle a activar la API.
+Esto debe hacerse idealmente antes o durante el proceso de pedido de la pantalla, y quedan inicializadas en el propio dispositivo durante la fabricación. Si ha adquirido una pantalla SDK pero no ha sido inicializada en su momento para la comunicación por API, contáctenos para ayudarle a activar la API.
 
 Estas claves son necesarias para el proceso de firma de la petición HTTP.
 
@@ -123,7 +127,7 @@ Respuesta:
 ## 3.2 Formas de especificar la ID
 >En caso de una conexión directa con un dispositivo no es obligatorio especificar la ID, excepto en algunos casos (véase "Método `getAll`").
 
-Para especificar el dispositivo que queremos controlar se pueden las siguientes formas:
+Para especificar el dispositivo que queremos controlar se pueden usar las siguientes formas:
 1. No especificar ID - /api/device/ Indica que operamos en el dispositivo local
 2. En la URL forma 1 - /api/device/C16L-D24-A0001,C16L-D24-A0002
 3. En la URL forma 2 - /api/device/?id=C16L-D24-A0001,C16L-D24-A0002
@@ -151,17 +155,17 @@ Hay dos reglas de firma:
 `sign = HMACMD5(body + sdkKey + date, sdkSecret)`
 
 
-Donde:
-	`sign`: La firma calculada, agregado al encabezado de la solicitud HTTP
-	`HMACMD5`: Función criptográfica HMAC-MD5
-    `body`: Todo el contenido del cuerpo de la solicitud HTTP
-    `date`: Hora y fecha actual del cliente, campo del encabezado HTTP
-    `sdkKey`: ofrecido durante el registro, campo del encabezado HTTP
+Donde:  
+	`sign`: La firma calculada, agregado al encabezado de la solicitud HTTP  
+	`HMACMD5`: Función criptográfica HMAC-MD5  
+    `body`: Todo el contenido del cuerpo de la solicitud HTTP  
+    `date`: Hora y fecha actual del cliente, campo del encabezado HTTP  
+    `sdkKey`: ofrecido durante el registro, campo del encabezado HTTP  
     `sdkSecret`: ofrecido durante el registro (clave secreta, no se transmite)
     
 
 ### 3.3.2 Regla 2 (Usada solo para la interfaz de archivos):
-Para la interfaz de archivos se deja el cuerpo de la solicitud fuera:
+Para la interfaz de archivos:
 
 `sign = HMACMD5(sdkKey + date, sdkSecret)`
 
@@ -199,7 +203,7 @@ Hay principalmente 4 interfaces:
 
 # 4. Interfaz de dispositivo /api/device/
 
-La interfaz de dispositivo se utiliza principalmente para operar propio dispositivo (ajustar brillo, apagar/encender...) como para obtener información del estado del dispositivo.
+La interfaz de dispositivo se utiliza principalmente para gestionar las propiedades del dispositivo (ajustar brillo, apagar/encender...) como para obtener información del estado del dispositivo.
 
 ## 4.1 Métodos de dispositivo
 
@@ -209,6 +213,7 @@ La interfaz de dispositivo se utiliza principalmente para operar propio disposit
 >Con este método puedes leer las propiedades como el brillo, la hora interna, la versión de firmware, etc.
 
 **Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -301,7 +306,8 @@ La interfaz de dispositivo se utiliza principalmente para operar propio disposit
 
 >Algunas propiedades son de solo lectura y no se pueden cambiar. Consultar la tabla de más arriba.
 
-**Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+**Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`  
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -345,7 +351,8 @@ La interfaz de dispositivo se utiliza principalmente para operar propio disposit
 
 >Principalmente para saber si la pantalla está encendida o en stand-by, además de algunas propiedades como la IP, etc.
 
-**Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+**Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`  
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -409,6 +416,7 @@ ___
 >NOTA: con este método no es posible leer los horarios establecidos con HDPlayer.
 
 **Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -505,7 +513,7 @@ ___
 
 >Puedes establecer con este método un horario de encendido/apagado o de cambio de brillo por horas.
 >
->NOTA: En el caso del brillo y el volumen es posible que no produzca un cambio inmediato, pues solo entra en efecto en las horas de cambio que se han establecido. Con un cambio de horario de brillo se recomienda actualizar manualmente el brillo con `"SetDeviceProperty"`.
+>NOTA: En el caso del brillo (y del volumen) es posible que no produzca un cambio inmediato, pues solo entra en efecto en las horas de cambio que se han establecido. Al realizar un cambio de horario se recomienda actualizar manualmente el brillo con `"SetDeviceProperty"`.
 
 Hay dos métodos para cambiar los horarios:
 - `"setScheduledTask"`: Reemplaza todos los elementos existentes.
@@ -519,6 +527,7 @@ Hay dos métodos para cambiar los horarios:
 |`relay`|Franjas horarias para el relé integrado (normalmente no usado)|
 
 **Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -603,13 +612,14 @@ Hay dos métodos para cambiar los horarios:
 ### 4.1.6 pushStatus
 ***Push proactivo (para área dinámica)***
 
->Establece el valor de las variables que hemos usado con un programa de área dinámica (ver sección y ejemplo de un área dinámica, en los métodos de la interfaz de programa).
+>Modifica el valor de las variables de un programa de área dinámica (ver sección y ejemplo de un área dinámica, en los métodos de la interfaz de programa).
 >
 >💡 Cómo probar este ejemplo:
 > 1. En los ejemplos de Postman abre "Dynamic area" y envíalo
 > 2. Abre este ejemplo "Proactive push" y envíalo
 
 **Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -653,10 +663,11 @@ Hay dos métodos para cambiar los horarios:
 >
 >💡 Cómo probar este ejemplo:
 > 1. En los ejemplos de Postman subir "Dynamic area"
-> 2. Hacer un servidor web que devuelva el texto plano `"ParkingSpace,110 Temperature,25"`
-> 3. Abre el ejemplo en Postman "Set periodic task" y cambia las URLs a tu servicio web.
+> 2. Necesitas una URL que devuelva el texto plano `"ParkingSpace,110 Temperature,25"`
+> 3. Abre el ejemplo en Postman "Set periodic task" y cambia las URLs.
 
 **Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -701,9 +712,7 @@ Temperature,25
 }
 ```
 
-**Explicación:** Cada variable necesita su propia entrada. El dispositivo obtiene los datos una vez pero aplica cada expresión regular individualmente, actualizando tanto `{{ParkingSpace}}` como `{{Temperature}}` en el área dinámica.
-
-El motor regex del dispositivo solo captura **el primer par clave-valor** que coincide dentro de un único patrón `rege`. Para múltiples variables desde la misma URL, **cree una entrada de tarea separada por cada variable**. El ejemplo muestra cómo.
+El motor regex del dispositivo solo captura **el primer par clave-valor** que coincide dentro de un único patrón `rege`. Para múltiples variables desde la misma URL, **cree una entrada de tarea separada por cada variable**, tal y como se muestra en el ejemplo.
 
 **Respuesta — ejemplo:**
 ```json
@@ -726,6 +735,7 @@ El motor regex del dispositivo solo captura **el primer par clave-valor** que 
 >Lee la tarea de actualización que hemos establecido en el apartado anterior, usado en áreas dinámicas (ver sección y ejemplo de un área dinámica, en los métodos de la interfaz de programa).
 
 **Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -778,6 +788,7 @@ El motor regex del dispositivo solo captura **el primer par clave-valor** que 
 >Reinicia el dispositivo tras unos segundos.
 
 **Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -825,6 +836,7 @@ El motor regex del dispositivo solo captura **el primer par clave-valor** que 
 >Enciende la pantalla si ésta está apagada (stand-by).
 
 **Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -864,6 +876,7 @@ El motor regex del dispositivo solo captura **el primer par clave-valor** que 
 >Pone la pantalla en estado stand-by con la pantalla en negro
 
 **Endpoint:** `POST 127.0.0.1:30080/api/device/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -899,9 +912,10 @@ El motor regex del dispositivo solo captura **el primer par clave-valor** que 
 
 ## 4.2 Lista de dispositivos en línea (/api/device/list/)
 
->Devuelve una lista de los dispositivos conectados en caso de operar un server. En caso de estar operando directamente con un dispositivo la lista tendrá sólo el dispositivo local.
+>Devuelve una lista de los dispositivos conectados en caso de operar un **API gateway** en un servidor. En caso de estar operando directamente con un dispositivo la lista tendrá sólo el dispositivo local.
 
 **Endpoint:** `GET 127.0.0.1:30080/api/device/list/`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -976,6 +990,7 @@ Los métodos disponibles son:
 - **Manejo de UUID:** Si proporcionas un UUID, el dispositivo lo usará. Si lo omites, el dispositivo genera uno automáticamente.
 
 **Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -1032,6 +1047,7 @@ Los métodos disponibles son:
 
 
 **Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -1079,6 +1095,7 @@ Los métodos disponibles son:
 - **Manejo de UUID:** Proporcionas los UUID para el nuevo conjunto de programas, si se omite el dispositivo genera uno automáticamente. El dispositivo eliminará todos los programas existentes.
 
 **Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -1117,6 +1134,7 @@ Los métodos disponibles son:
 - **Manejo de UUID:** El UUID es **obligatorio** para cada programa que se quiera eliminar. Debe coincidir con un programa existente.
 
 **Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -1166,6 +1184,7 @@ Los métodos disponibles son:
 - **Manejo de UUID:** No aplica — este método no requiere enviar UUID. Solo devuelve los que ya existen.
 
 **Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -1287,7 +1306,7 @@ Todos los atributos se combinan con **AND lógico**. Se activa la reproducción 
 
 | Parámetro | Tipo          | Obligatorio | Descripción |
 | --------- | ------------- | ----------- | ----------- |
-| font.name      | String        | No          | Nombre de la fuente (consulte tabla)|
+| font.name      | String        | No          | Nombre de la fuente (consulte el apéndice)|
 | font.size      | Int           | No          | Tamaño de fuente |
 | font.color     | Color `"#RRGGBB"` | No          | Color de fuente |
 | font.bold      | Bool          | No          | Negrita |
@@ -1301,6 +1320,7 @@ Todos los atributos se combinan con **AND lógico**. Se activa la reproducción 
 ### 5.4.1 Ejemplo de programa de texto:
 
 **Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -1382,11 +1402,12 @@ Todos los atributos se combinan con **AND lógico**. Se activa la reproducción 
 
 > NOTA: para agregar efectos consulte el apéndice "Efectos".
 
-### 5.5.1 Ejemplo de programa de imagen:
+### 5.5.1 Ejemplo de programa de imagen (subido con RemoteServer):
 
->El ejemplo requiere subir previamente tres archivos img1.jpg, img2.jpg y img3.jpg al dispositivo con la herramienta RemoteServer.exe
+>El ejemplo requiere subir previamente tres archivos img1.jpg, img2.jpg y img3.jpg al dispositivo con la herramienta [RemoteServer.exe](#62-alternativa-subir-archivos-con-remoteserverexe)
 
 **Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -1464,6 +1485,83 @@ Todos los atributos se combinan con **AND lógico**. Se activa la reproducción 
 }
 ```
 
+### 5.5.1 Ejemplo de programa de imagen (con URL):
+
+**Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
+**Content-Type:** `application/json`
+
+**Headers:**
+
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
+
+**Request body — ejemplo:**
+```json
+{
+    "method": "replace",
+    "data": [
+        {
+            "name": "Program 1",
+            "type": "normal",
+            "uuid": "c2f2ae66-a2f0-4988-bcf5-51b582b9c03d",
+            "area": [
+                {
+                    "x": 0,
+                    "y": 0,
+                    "width": 128,
+                    "height": 64,
+                    "item": [
+                        {
+                            "type": "image",
+                            "file": "https://raw.githubusercontent.com/anavarui/HTTP-API-Full-Color-ESP/refs/heads/main/postman-ejemplos/online-resources/butterfly.jpg",
+                            "fileMd5": "7672ccb6f33eb99ca14f5776e492a4e8",
+                            "fileSize": 22825,
+                            "fit": "stretch",
+                            "effect": {
+                                "type": 0,
+                                "speed": 5,
+                                "hold": 5000
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+```
+
+**Respuesta — ejemplo de éxito:**
+```json
+{
+    "method": "replace",
+    "message": "ok",
+    "data": [
+        {
+            "id": "C16L-D24-007C6",
+            "message": "ok",
+            "data": "kSuccess"
+        }
+    ]
+}
+```
+**Respuesta — ejemplo de error de descarga:**
+```json
+{
+    "method": "replace",
+    "message": "ok",
+    "data": [
+        {
+            "id": "C16L-D24-00622",
+            "message": "failed",
+            "data": "kDownloadFileFailed"
+        }
+    ]
+}
+```
+
 ---
 ## 5.6 Ítem de video
 
@@ -1476,11 +1574,12 @@ Todos los atributos se combinan con **AND lógico**. Se activa la reproducción 
 | fileSize  |                  | Int (Bytes)| No          | Tamaño del archivo; si ya existe en el dispositivo, se omite la descarga |
 
 
-### 5.6.1 Ejemplo de programa de vídeo:
+### 5.6.1 Ejemplo de programa de vídeo (subido con RemoteServer):
 
->El ejemplo requiere subir previamente un archivo video.mp4 al dispositivo con la herramienta RemoteServer.exe
+>El ejemplo requiere subir previamente un archivo video.mp4 al dispositivo con la herramienta [RemoteServer.exe](#62-alternativa-subir-archivos-con-remoteserverexe)
 
 **Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -1533,6 +1632,78 @@ Todos los atributos se combinan con **AND lógico**. Se activa la reproducción 
 }
 ```
 
+### 5.6.1 Ejemplo de programa de vídeo (con URL):
+
+**Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
+**Content-Type:** `application/json`
+
+**Headers:**
+
+| Parámetro | Valor de ejemplo    | Tipo   | Obligatorio |
+| --------- | ------------------- | ------ | ----------- |
+| sdkKey    | a7fa6795aaa891e2    | String | Sí          |
+
+**Request body — ejemplo:**
+```json
+{
+    "method": "replace",
+    "data": [
+        {
+            "name": "Program 1",
+            "type": "normal",
+            "uuid": "951b9039-b5ba-4d99-80ae-b156ca9c9f77",
+            "area": [
+                {
+                    "x": 0,
+                    "y": 0,
+                    "width": 128,
+                    "height": 64,
+                    "item": [
+                        {
+                            "type": "video",
+							"file": "https://raw.githubusercontent.com/anavarui/HTTP-API-Full-Color-ESP/refs/heads/main/postman-ejemplos/online-resources/tiger.mp4",
+                            "fileMd5": "db7dfa939dbed6fb3830b587737bfbf9",
+                            "fileSize": 17994548,
+                            "aspectRatio": false
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+```
+
+**Respuesta — ejemplo de éxito:**
+```json
+{
+    "method": "replace",
+    "message": "ok",
+    "data": [
+        {
+            "id": "C16L-D24-007C6",
+            "message": "ok",
+            "data": "kSuccess"
+        }
+    ]
+}
+```
+**Respuesta — ejemplo de error de descarga:**
+```json
+{
+    "method": "replace",
+    "message": "ok",
+    "data": [
+        {
+            "id": "C16L-D24-00622",
+            "message": "failed",
+            "data": "kDownloadFileFailed"
+        }
+    ]
+}
+```
+
 ---
 ## 5.7 Ítem de reloj digital
 > Muestra en forma de **texto** los campos:
@@ -1578,6 +1749,7 @@ Todos los atributos se combinan con **AND lógico**. Se activa la reproducción 
 ### 5.7.1 Ejemplo de programa de reloj digital:
 
 **Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -1653,6 +1825,7 @@ Todos los atributos se combinan con **AND lógico**. Se activa la reproducción 
 ## 5.8 Ítem de reloj analógico
 
 **Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -1696,6 +1869,7 @@ Todos los atributos se combinan con **AND lógico**. Se activa la reproducción 
 ### 5.8.1 Ejemplo de programa de reloj analógico:
 
 **Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -1800,6 +1974,7 @@ Respuesta — ejemplo:
 ### 5.9.1 Ejemplo de programa de área dinámica:
 
 **Endpoint:** `POST 127.0.0.1:30080/api/program/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -1899,6 +2074,7 @@ Respuesta — ejemplo:
 >Para subir archivos al dispositivo.
 
 **Endpoint:** `POST 127.0.0.1:30080/api/file/{{deviceid}}`
+
 **Content-Type:** `multipart/form-data`
 
 **Headers:**
@@ -1932,8 +2108,6 @@ Ejemplo en Postman:
 
 
 ## 6.1 Cómo usar archivos subidos con la API
->NOTA: estas recomendaciones irán cambiando conforme el desarrollador de la API nos ofrezca más información. Un método alternativo a la API es usar la herramienta RemoteServer.exe
-
 En la respuesta, el elemento `"data"` es una URL que usaremos para el programa de imagen.
 
 ![](images/Pasted%20image%2020260521163001.png)
@@ -1943,7 +2117,7 @@ Luego en el programa usamos esta URL para `"file"`, o bien tal cual o bien susti
 ![](images/Pasted%20image%2020260521164344.png)
 
 ## 6.2 Alternativa: subir archivos con RemoteServer.exe
-Se incluye una utilidad llamada RemoteServer.exe con la que podemos subir archivos previamente a la memoria interna del dispositivo.
+Se incluye una utilidad llamada RemoteServer.exe con la que podemos subir archivos a la memoria interna del dispositivo si conocemos la IP del dispositivo.
 
 ![](images/Pasted%20image%2020260521170011.png)
 
@@ -1962,6 +2136,7 @@ Luego en el programa de imagen ponemos el nombre del archivo, sin necesidad de e
 >Permite hacer una captura de pantalla para ver lo que está mostrando el dispositivo en este momento.
 
 **Endpoint:** `GET 127.0.0.1:30080/api/screenshot/{{deviceid}}`
+
 **Content-Type:** `application/json`
 
 **Headers:**
@@ -2068,9 +2243,9 @@ Luego en el programa de imagen ponemos el nombre del archivo, sin necesidad de e
     ]
 }
 ```
->**IMPORTANTE**: Añadir un borde en un **programa entero** hará que el espacio de programa sea menor. Tendrás que ajustar el tamaño de las áreas en función del grosor del borde.
+>⚠️ **IMPORTANTE**: Añadir un borde en un **programa entero** hará que el espacio de programa sea menor. Tendrás que ajustar el tamaño de las áreas en función del grosor del borde.
 
-## 8.3 Apéndice 3: Lista de fuentes disponibles
+## 8.3 Apéndice 3: Fuentes de texto
 
 ```
 1. "Bitstream Vera Sans"
@@ -2169,6 +2344,6 @@ Lista sacada de la documentación del protocolo SDK "SDK3.0 Manual.pdf".
 Documentación original:
 https://gitee.com/szhuidu/cn.huidu.device.sdk/blob/master/README.en.md
 
-Esta guía está basada en la documentación original de Hudiu, y la información ha sido rectificada, ampliada y mejorada. 2026
+Esta guía está basada en la documentación original de Huidu, y la información ha sido rectificada y ampliada. 2026
 
 *Ejemplos probados en HD-C16L SDK con firmware 7.11.18.0 y hardware v1.0.*
