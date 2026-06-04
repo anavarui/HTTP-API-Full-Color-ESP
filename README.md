@@ -712,7 +712,7 @@ Temperature,25
 }
 ```
 
-El motor regex del dispositivo solo captura **el primer par clave-valor** que coincide dentro de un único patrón `rege`. Para múltiples variables desde la misma URL, **cree una entrada de tarea separada por cada variable**.
+El motor regex del dispositivo solo captura **el primer par clave-valor** que coincide dentro de un único patrón `rege`. Para múltiples variables desde la misma URL, **cree una entrada de tarea separada por cada variable**, tal y como se muestra en el ejemplo.
 
 **Respuesta — ejemplo:**
 ```json
