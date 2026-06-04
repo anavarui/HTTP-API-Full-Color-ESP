@@ -1,11 +1,8 @@
 Documentación HTTP API para FULL COLOR SDK
 ---
 
-**Cambios recientes (04/06/2026)**
-- *API gateway ya disponible para instalar en su servidor*
-- Ya no es neceario un teléfono para el registro
-- Ejemplos para Postman corregidos
-- Correcciones varias
+> 💡 **NOVEDADES: **
+> *API gateway* ya disponible para instalar en su servidor!
 
 
 # Contenido
