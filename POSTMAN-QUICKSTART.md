@@ -27,7 +27,7 @@ Una vez importada la colección, ahora vamos a `Create Enviroment` y pon un nomb
 
 Creamos las siguientes variables:
 
-`ip` - la IP del  (puedes verla con HDPlayer)
+`ip` - la IP del dispositivo (puedes verla con HDPlayer)
 
 `deviceid` - la ID del dispositivo (puedes verla con HDPlayer)
 
